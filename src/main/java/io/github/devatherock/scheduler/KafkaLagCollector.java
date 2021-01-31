@@ -34,6 +34,11 @@ import lombok.extern.slf4j.Slf4j;
 @Singleton
 @RequiredArgsConstructor
 public class KafkaLagCollector {
+    private static final String TAG_TOPIC = "topic";
+    private static final String TAG_GROUP = "group";
+    private static final String TAG_PARTITION = "partition";
+    private static final String TAG_CLUSTER_NAME = "cluster_name";
+    
     private final MeterRegistry meterRegistry;
     private final ApplicationProperties config;
     private final ScheduledExecutorService scheduler;
@@ -63,14 +68,15 @@ public class KafkaLagCollector {
 
             for (String groupId : groupIds) {
                 scheduler.scheduleAtFixedRate(() -> {
-                    collectConsumerGroupLag(adminClient, groupId);
+                    collectConsumerGroupLag(lagMonitorConfig.getName(), groupId);
                 }, 1, 1, TimeUnit.MINUTES);
             }
         }
     }
 
-    private void collectConsumerGroupLag(Admin adminClient, String groupId) {
+    private void collectConsumerGroupLag(String clusterName, String groupId) {
         LOGGER.debug("Collecting metrics for consumer group '{}'", groupId);
+        Admin adminClient = adminClients.get(clusterName);
 
         try {
             ListConsumerGroupOffsetsResult groupOffsetsResult = adminClient
@@ -91,26 +97,29 @@ public class KafkaLagCollector {
                     // Latest partition offset
                     DistributionSummary
                             .builder("kafka.partition.offset")
-                            .tag("topic", groupOffset.getKey().topic())
-                            .tag("partition", String.valueOf(groupOffset.getKey().partition()))
+                            .tag(TAG_TOPIC, groupOffset.getKey().topic())
+                            .tag(TAG_PARTITION, String.valueOf(groupOffset.getKey().partition()))
+                            .tag(TAG_CLUSTER_NAME, clusterName)
                             .register(meterRegistry)
                             .record(partitionOffsetResult.offset());
 
                     // Latest consumer group offset
                     DistributionSummary
                             .builder("kafka.consumer.offset")
-                            .tag("topic", groupOffset.getKey().topic())
-                            .tag("partition", String.valueOf(groupOffset.getKey().partition()))
-                            .tag("group", groupId)
+                            .tag(TAG_TOPIC, groupOffset.getKey().topic())
+                            .tag(TAG_PARTITION, String.valueOf(groupOffset.getKey().partition()))
+                            .tag(TAG_GROUP, groupId)
+                            .tag(TAG_CLUSTER_NAME, clusterName)
                             .register(meterRegistry)
                             .record(groupOffset.getValue().offset());
 
                     // Lag
                     DistributionSummary
                             .builder("kafka.consumer.lag")
-                            .tag("topic", groupOffset.getKey().topic())
-                            .tag("partition", String.valueOf(groupOffset.getKey().partition()))
-                            .tag("group", groupId)
+                            .tag(TAG_TOPIC, groupOffset.getKey().topic())
+                            .tag(TAG_PARTITION, String.valueOf(groupOffset.getKey().partition()))
+                            .tag(TAG_GROUP, groupId)
+                            .tag(TAG_CLUSTER_NAME, clusterName)
                             .register(meterRegistry)
                             .record(partitionOffsetResult.offset() - groupOffset.getValue().offset());
                 }
