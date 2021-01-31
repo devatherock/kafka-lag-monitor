@@ -1,0 +1,16 @@
+micronaut:
+  application:
+    name: kafkaLagMonitor
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        descriptions: true
+        step: PT1M
+      influx:
+        enabled: true
+        step: PT1M
+    enabled: true
+endpoints:
+  prometheus:
+    sensitive: false    

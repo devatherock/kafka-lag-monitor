@@ -1,0 +1,6 @@
+applicationType: default
+defaultPackage: kafka.lag.monitor
+testFramework: junit
+sourceLanguage: java
+buildTool: gradle
+features: [app-name, graalvm, gradle, http-client, java, java-application, junit, kafka, logback, management, micrometer, micrometer-influx, micrometer-prometheus, netty-server, openapi, readme, shade, yaml]
