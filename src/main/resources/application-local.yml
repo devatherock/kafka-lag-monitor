@@ -1,0 +1,12 @@
+micronaut:
+  metrics:
+    export:
+      influx:
+        uri: http://localhost:${micronaut.server.port:8080}/influx
+kafka:
+  clusters:
+    - name: test-cluster
+      servers: "localhost:9092"
+  lag-monitor:
+    clusters:
+      - name: test-cluster
