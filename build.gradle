@@ -40,7 +40,6 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
 
     compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.1'
-    compile group: 'org.apache.kafka', name: 'kafka_2.13', version: '2.6.1'
 }
 
 
