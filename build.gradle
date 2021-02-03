@@ -1,9 +1,14 @@
 plugins {
     id("com.github.johnrengelman.shadow") version "6.1.0"
     id("io.micronaut.application") version "1.3.2"
+    id 'java'
+    id 'groovy'
+    id 'jacoco'
+    id 'org.sonarqube' version '3.0'
+    id 'com.github.kt3k.coveralls' version '2.10.2'
 }
 
-version = "0.1"
+version = "0.1.0"
 group = "io.github.devatherock"
 
 repositories {
@@ -39,9 +44,12 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
     runtimeOnly("ch.qos.logback:logback-classic")
 
-    compile group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.1'
-}
+    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.1'
 
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '1.3-groovy-2.5'
+    testImplementation group: 'cglib', name: 'cglib-nodep', version: '3.3.0'
+    testImplementation group: 'org.objenesis', name: 'objenesis', version: '3.1'
+}
 
 application {
     mainClass.set("io.github.devatherock.Application")
@@ -53,7 +61,23 @@ run {
     systemProperties(System.properties)
 }
 
-java {
-    sourceCompatibility = JavaVersion.toVersion("1.8")
-    targetCompatibility = JavaVersion.toVersion("1.8")
-}
+ext.jacoco = [
+    exclusions: [
+        'io/github/devatherock/Application.class',
+        'io/github/devatherock/test/InfluxdbController.class',
+        
+        // TODO Remove exclusions once tests have been written
+        'io/github/devatherock/config/AppConfig.class',
+        'io/github/devatherock/config/ApplicationProperties*'
+    ],
+    // TODO Remove once all tests have been written
+    coverageThresholds: [
+        'io.github.devatherock.scheduler.KafkaLagCollector': [
+            'BRANCH': 0.25,
+            'COMPLEXITY': 0.23,
+            'INSTRUCTION': 0.13,
+            'LINE': 0.17
+        ]
+    ]
+]
+apply from: '../gradle-includes/checks.gradle'

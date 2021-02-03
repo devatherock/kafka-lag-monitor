@@ -1,5 +1,8 @@
 [![CircleCI](https://circleci.com/gh/devatherock/kafka-lag-monitor.svg?style=svg)](https://circleci.com/gh/devatherock/kafka-lag-monitor)
+[![Coverage Status](https://coveralls.io/repos/github/devatherock/kafka-lag-monitor/badge.svg?branch=master)](https://coveralls.io/github/devatherock/kafka-lag-monitor?branch=master)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=kafka-lag-monitor&metric=alert_status)](https://sonarcloud.io/component_measures?id=kafka-lag-monitor&metric=alert_status&view=list)
 [![Docker Pulls](https://img.shields.io/docker/pulls/devatherock/kafka-lag-monitor.svg)](https://hub.docker.com/r/devatherock/kafka-lag-monitor/)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=kafka-lag-monitor&metric=ncloc)](https://sonarcloud.io/component_measures?id=kafka-lag-monitor&metric=ncloc)
 [![Docker Image Size](https://img.shields.io/docker/image-size/devatherock/kafka-lag-monitor.svg?sort=date)](https://hub.docker.com/r/devatherock/kafka-lag-monitor/)
 # kafka-lag-monitor
 Monitors kafka lag and publishes the metrics to different metrics backends
@@ -10,6 +13,8 @@ The supported metrics backends are Prometheus and InfluxDB
 ### Sample metrics
 
 **Prometheus:**
+
+The metrics in Prometheus format can be accessed at `/prometheus` endpoint
 
 ```text
 # HELP kafka_consumer_lag_max  
@@ -45,6 +50,8 @@ kafka_partition_offset_max{cluster_name="test-cluster",partition="0",topic="test
 ```
 
 **Influxdb:**
+
+Metrics in InfluxDB's line protocol format will be reported by default to `http://localhost:8086/write` endpoint, every minute
 
 ```text
 kafka_consumer_lag,cluster_name=test-cluster,group=test-consumer,partition=0,topic=test-topic,metric_type=histogram sum=2,count=1,mean=2,upper=2 1612125711313

@@ -29,6 +29,12 @@ import io.micronaut.context.annotation.Context;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Class to collect kafka lag periodically
+ * 
+ * @author devaprasadh
+ *
+ */
 @Slf4j
 @Context
 @Singleton
