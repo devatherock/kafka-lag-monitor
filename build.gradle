@@ -73,10 +73,10 @@ ext.jacoco = [
     // TODO Remove once all tests have been written
     coverageThresholds: [
         'io.github.devatherock.scheduler.KafkaLagCollector': [
-            'BRANCH': 0.25,
-            'COMPLEXITY': 0.23,
-            'INSTRUCTION': 0.13,
-            'LINE': 0.17
+            'BRANCH': 0.50,
+            'COMPLEXITY': 0.46,
+            'INSTRUCTION': 0.57,
+            'LINE': 0.64
         ]
     ]
 ]
