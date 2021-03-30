@@ -67,17 +67,16 @@ ext.jacoco = [
         'io/github/devatherock/test/InfluxdbController.class',
         
         // TODO Remove exclusions once tests have been written
-        'io/github/devatherock/config/AppConfig.class',
-        'io/github/devatherock/config/ApplicationProperties*'
+        'io/github/devatherock/config/AppConfig.class'
     ],
     // TODO Remove once all tests have been written
     coverageThresholds: [
         'io.github.devatherock.scheduler.KafkaLagCollector': [
-            'BRANCH': 0.50,
-            'COMPLEXITY': 0.46,
-            'INSTRUCTION': 0.57,
-            'LINE': 0.64
+            'BRANCH': 0.90,
+            'COMPLEXITY': 0.84,
+            'INSTRUCTION': 0.89,
+            'LINE': 0.84
         ]
     ]
 ]
-apply from: '../gradle-includes/checks.gradle'
+apply from: 'https://raw.githubusercontent.com/devatherock/gradle-includes/master/checks.gradle'
