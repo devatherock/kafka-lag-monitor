@@ -13,6 +13,7 @@ import java.util.concurrent.TimeoutException;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import org.apache.kafka.clients.admin.Admin;
@@ -28,7 +29,6 @@ import io.github.devatherock.config.ApplicationProperties.LagMonitorConfig;
 import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micronaut.context.annotation.Context;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -40,7 +40,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Context
 @Singleton
-@RequiredArgsConstructor
 public class KafkaLagCollector {
     private static final String TAG_TOPIC = "topic";
     private static final String TAG_GROUP = "group";
@@ -51,6 +50,13 @@ public class KafkaLagCollector {
     private final ApplicationProperties config;
     private final ScheduledExecutorService scheduler;
     private final Map<String, Admin> adminClients = new HashMap<>();
+
+    public KafkaLagCollector(MeterRegistry meterRegistry, ApplicationProperties config,
+            @Named("lagMonitorScheduler") ScheduledExecutorService scheduler) {
+        this.meterRegistry = meterRegistry;
+        this.config = config;
+        this.scheduler = scheduler;
+    }
 
     @PostConstruct
     public void init() {
