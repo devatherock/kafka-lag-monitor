@@ -73,11 +73,11 @@ ext.jacoco = [
     // TODO Remove once all tests have been written
     coverageThresholds: [
         'io.github.devatherock.scheduler.KafkaLagCollector': [
-            'BRANCH': 0.50,
-            'COMPLEXITY': 0.46,
-            'INSTRUCTION': 0.57,
-            'LINE': 0.64
+            'BRANCH': 0.90,
+            'COMPLEXITY': 0.84,
+            'INSTRUCTION': 0.90,
+            'LINE': 0.87
         ]
     ]
 ]
-apply from: '../gradle-includes/checks.gradle'
+apply from: 'https://raw.githubusercontent.com/devatherock/gradle-includes/master/checks.gradle'
