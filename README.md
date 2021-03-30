@@ -61,3 +61,14 @@ kafka_consumer_offset,cluster_name=test-cluster,group=test-consumer,partition=1,
 kafka_partition_offset,cluster_name=test-cluster,partition=0,topic=test-topic,metric_type=histogram sum=15,count=1,mean=15,upper=15 1612125711311
 kafka_partition_offset,cluster_name=test-cluster,partition=1,topic=test-topic,metric_type=histogram sum=18,count=1,mean=18,upper=18 1612125711313
 ```
+
+## Usage
+
+```
+docker run --rm \
+        -p 8080:8080  \
+        -v /path/to/config:/config \
+        -e MICRONAUT_CONFIG_FILES=/config/application.yml \
+        -e MICRONAUT_METRICS_EXPORT_INFLUX_ENABLED=false \
+        devatherock/kafka-lag-monitor:latest
+```        
