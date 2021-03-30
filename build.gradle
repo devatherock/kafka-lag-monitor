@@ -67,8 +67,7 @@ ext.jacoco = [
         'io/github/devatherock/test/InfluxdbController.class',
         
         // TODO Remove exclusions once tests have been written
-        'io/github/devatherock/config/AppConfig.class',
-        'io/github/devatherock/config/ApplicationProperties*'
+        'io/github/devatherock/config/AppConfig.class'
     ],
     // TODO Remove once all tests have been written
     coverageThresholds: [

@@ -31,7 +31,12 @@ class KafkaLagCollectorSpec extends Specification {
     KafkaLagCollector lagCollector
 
     AdminClient adminClient = Mock()
-    ApplicationProperties config = new ApplicationProperties()
+    ApplicationProperties config = new ApplicationProperties(clusters: [
+            new ApplicationProperties.ClusterConfig(
+                    name: 'test-cluster',
+                    servers: 'localhost:9092'
+            )]
+    )
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5)
     MeterRegistry meterRegistry = new SimpleMeterRegistry()
 
