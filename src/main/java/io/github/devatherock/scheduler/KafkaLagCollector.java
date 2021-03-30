@@ -104,9 +104,11 @@ public class KafkaLagCollector {
             for (Future<?> future : futures) {
                 future.get();
             }
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            LOGGER.error("Exception: {}, Message: {}", e.getClass().getName(),
-                    e.getMessage());
+        } catch (ExecutionException | TimeoutException exception) {
+            LOGGER.error("Exception: {}, Message: {}", exception.getClass().getName(),
+                    exception.getMessage());
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
         }
     }
 
@@ -169,9 +171,11 @@ public class KafkaLagCollector {
             } else {
                 LOGGER.info("Offsets not found for consumer group '{}'", groupId);
             }
-        } catch (InterruptedException | ExecutionException | TimeoutException e) {
-            LOGGER.error("Group Id: {}, Exception: {}, Message: {}", groupId, e.getClass().getName(),
-                    e.getMessage());
+        } catch (ExecutionException | TimeoutException exception) {
+            LOGGER.error("Group Id: {}, Exception: {}, Message: {}", groupId, exception.getClass().getName(),
+                    exception.getMessage());
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
         }
     }
 

@@ -75,8 +75,8 @@ ext.jacoco = [
         'io.github.devatherock.scheduler.KafkaLagCollector': [
             'BRANCH': 0.90,
             'COMPLEXITY': 0.84,
-            'INSTRUCTION': 0.90,
-            'LINE': 0.87
+            'INSTRUCTION': 0.89,
+            'LINE': 0.84
         ]
     ]
 ]
