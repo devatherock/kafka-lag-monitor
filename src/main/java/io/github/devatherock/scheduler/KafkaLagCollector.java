@@ -71,9 +71,8 @@ public class KafkaLagCollector {
         for (LagMonitorConfig lagMonitorConfig : config.getLagMonitor().getClusters()) {
             if (!lagMonitorConfig.getConsumerGroups().isEmpty()) {
                 for (String groupId : lagMonitorConfig.getConsumerGroups()) {
-                    scheduler.scheduleAtFixedRate(() -> {
-                        collectConsumerGroupLag(lagMonitorConfig.getName(), groupId);
-                    }, 1, 1, TimeUnit.MINUTES);
+                    scheduler.scheduleAtFixedRate(() -> collectConsumerGroupLag(lagMonitorConfig.getName(), groupId), 1,
+                            1, TimeUnit.MINUTES);
                 }
             } else {
                 scheduler.scheduleAtFixedRate(() -> {
@@ -96,10 +95,8 @@ public class KafkaLagCollector {
             adminClient.listConsumerGroups().valid()
                     .get(config.getLagMonitor().getTimeoutSeconds(), TimeUnit.SECONDS).stream()
                     .filter(group -> isAllowedConsumerGroup(lagMonitorConfig, group.groupId()))
-                    .forEach(group -> {
-                        futures.add(scheduler
-                                .submit(() -> collectConsumerGroupLag(lagMonitorConfig.getName(), group.groupId())));
-                    });
+                    .forEach(group -> futures.add(scheduler
+                            .submit(() -> collectConsumerGroupLag(lagMonitorConfig.getName(), group.groupId()))));
 
             for (Future<?> future : futures) {
                 future.get();
@@ -191,8 +188,8 @@ public class KafkaLagCollector {
 
         if (config.getGroupAllowlistCompiled().isEmpty()) {
             if (!config.getGroupDenylistCompiled().isEmpty()) {
-                if (!config.getGroupDenylistCompiled().stream()
-                        .anyMatch(pattern -> pattern.matcher(consumerGroup).matches())) {
+                if (config.getGroupDenylistCompiled().stream()
+                        .noneMatch(pattern -> pattern.matcher(consumerGroup).matches())) {
                     isAllowed = true;
                 }
             } else {
