@@ -10,3 +10,5 @@ kafka:
   lag-monitor:
     clusters:
       - name: test-cluster
+        consumer-groups:
+          - test-consumer
