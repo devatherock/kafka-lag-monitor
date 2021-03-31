@@ -95,6 +95,7 @@ public class KafkaLagCollector {
      * @param lagMonitorConfig
      */
     private void collectConsumerGroupLag(LagMonitorConfig lagMonitorConfig) {
+        LOGGER.debug("Collecting metrics for cluster '{}'", lagMonitorConfig.getName());
         List<Future<?>> futures = new ArrayList<>();
         Admin adminClient = adminClients.get(lagMonitorConfig.getName());
 
@@ -114,6 +115,7 @@ public class KafkaLagCollector {
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
         }
+        LOGGER.info("Metrics collected for cluster '{}'", lagMonitorConfig.getName());
     }
 
     /**
@@ -123,7 +125,7 @@ public class KafkaLagCollector {
      * @param groupId
      */
     private void collectConsumerGroupLag(String clusterName, String groupId) {
-        LOGGER.debug("Collecting metrics for consumer group '{}'", groupId);
+        LOGGER.trace("Collecting metrics for consumer group '{}'", groupId);
         Admin adminClient = adminClients.get(clusterName);
 
         try {

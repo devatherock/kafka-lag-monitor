@@ -20,6 +20,7 @@ import spock.lang.Subject
 
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.ScheduledFuture
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
@@ -35,6 +36,10 @@ class KafkaLagCollectorSpec extends Specification {
             new ApplicationProperties.ClusterConfig(
                     name: 'test-cluster',
                     servers: 'localhost:9092'
+            ),
+            new ApplicationProperties.ClusterConfig(
+                    name: 'deva-cluster',
+                    servers: 'localhost:9093'
             )]
     )
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(5)
@@ -45,7 +50,7 @@ class KafkaLagCollectorSpec extends Specification {
         lagCollector.adminClients['test-cluster'] = adminClient
     }
 
-    void 'test schedule jobs - consumer group names specified'() {
+    void 'test init - consumer group names specified'() {
         given:
         String clusterName = 'test-cluster'
 
@@ -60,25 +65,49 @@ class KafkaLagCollectorSpec extends Specification {
                 ]
         ))
 
+        and:
+        Runnable runnable
+
         when:
-        lagCollector.scheduleJobs()
+        lagCollector.init()
+
+        then: 'capture runnable lambda'
+        2 * mockScheduler.scheduleAtFixedRate(!null as Runnable, 1, 1, TimeUnit.MINUTES) >> { params ->
+            runnable = params[0]
+            return Mock(ScheduledFuture)
+        }
+
+        when: 'execute captured runnable'
+        runnable.run()
 
         then:
-        2 * mockScheduler.scheduleAtFixedRate(!null as Runnable, 1, 1, TimeUnit.MINUTES)
+        noExceptionThrown()
     }
 
-    void 'test schedule jobs - consumer group names not specified'() {
+    void 'test init - consumer group names not specified'() {
         given:
         ScheduledExecutorService mockScheduler = Mock()
         lagCollector = new KafkaLagCollector(meterRegistry, config, mockScheduler)
         config.lagMonitor.clusters.add(new LagMonitorConfig(name: 'test-cluster'))
         config.lagMonitor.clusters.add(new LagMonitorConfig(name: 'deva-cluster'))
 
+        and:
+        Runnable runnable
+
         when:
-        lagCollector.scheduleJobs()
+        lagCollector.init()
 
         then:
-        2 * mockScheduler.scheduleAtFixedRate(!null as Runnable, 1, 1, TimeUnit.MINUTES)
+        2 * mockScheduler.scheduleAtFixedRate(!null as Runnable, 1, 1, TimeUnit.MINUTES) >> { params ->
+            runnable = params[0]
+            return Mock(ScheduledFuture)
+        }
+
+        when: 'execute captured runnable'
+        runnable.run()
+
+        then:
+        noExceptionThrown()
     }
 
     void 'test collect consumer group lag for multiple groups - exception thrown'() {
@@ -101,7 +130,7 @@ class KafkaLagCollectorSpec extends Specification {
         1 * adminClient.listConsumerGroups() >> groupsResult
         1 * groupsResult.valid() >> kafkaFuture
         1 * kafkaFuture.get(config.lagMonitor.timeoutSeconds, TimeUnit.SECONDS) >> {
-            throw new TimeoutException('test exception')
+            throw exception
         }
         0 * groupListing.groupId() >> groupId
         0 * adminClient.listConsumerGroups(groupId)
@@ -110,6 +139,12 @@ class KafkaLagCollectorSpec extends Specification {
         !meterRegistry.meters.any { it.id.name == 'kafka.partition.offset' }
         !meterRegistry.meters.any { it.id.name == 'kafka.consumer.offset' }
         !meterRegistry.meters.any { it.id.name == 'kafka.consumer.lag' }
+
+        where:
+        exception << [
+                new TimeoutException('test exception'),
+                new InterruptedException('test exception')
+        ]
     }
 
     void 'test collect consumer group lag for multiple groups - group not present in allow list'() {
@@ -286,13 +321,19 @@ class KafkaLagCollectorSpec extends Specification {
         1 * adminClient.listConsumerGroupOffsets(groupId) >> groupOffsetsResult
         1 * groupOffsetsResult.partitionsToOffsetAndMetadata() >> kafkaFuture
         1 * kafkaFuture.get(config.lagMonitor.timeoutSeconds, TimeUnit.SECONDS) >> {
-            throw new TimeoutException('test exception')
+            throw exception
         }
 
         then: 'no metrics will be recorded'
         !meterRegistry.meters.any { it.id.name == 'kafka.partition.offset' }
         !meterRegistry.meters.any { it.id.name == 'kafka.consumer.offset' }
         !meterRegistry.meters.any { it.id.name == 'kafka.consumer.lag' }
+
+        where:
+        exception << [
+                new TimeoutException('test exception'),
+                new InterruptedException('test exception')
+        ]
     }
 
     void 'test collect consumer group lag - group offsets is empty'() {

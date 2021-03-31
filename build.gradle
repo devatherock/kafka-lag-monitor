@@ -47,6 +47,12 @@ dependencies {
 
     implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.6.1'
 
+    testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
+    testImplementation "io.micronaut:micronaut-inject-groovy"
+    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
+    testImplementation "io.micronaut.test:micronaut-test-spock"
+
     testImplementation group: 'org.spockframework', name: 'spock-core', version: '1.3-groovy-2.5'
     testImplementation group: 'cglib', name: 'cglib-nodep', version: '3.3.0'
     testImplementation group: 'org.objenesis', name: 'objenesis', version: '3.1'
@@ -64,24 +70,8 @@ run {
 
 ext.jacoco = [
     exclusions: [
-        'io/github/devatherock/Application.class',
-        'io/github/devatherock/test/InfluxdbController.class',
-        // TODO Remove exclusions once tests have been written
-        'io/github/devatherock/config/AppConfig.class'
-    ],
-    // TODO Remove once all tests have been written
-    coverageThresholds: [
-        'io.github.devatherock.scheduler.KafkaLagCollector': [
-            'BRANCH': 0.90,
-            'COMPLEXITY': 0.84,
-            'INSTRUCTION': 0.89,
-            'LINE': 0.84
-        ]
+        'io/github/devatherock/Application.class'
     ]
 ]
-
-File codeFormatter = new File('code-formatter.xml')
-codeFormatter.delete()
-codeFormatter << new URL('https://raw.githubusercontent.com/devatherock/gradle-includes/master/code-formatter.xml').text
 
 apply from: 'https://raw.githubusercontent.com/devatherock/gradle-includes/master/checks.gradle'

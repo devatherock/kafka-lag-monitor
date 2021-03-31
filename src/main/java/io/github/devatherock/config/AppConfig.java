@@ -14,8 +14,15 @@ import io.micronaut.context.annotation.Factory;
 @Factory
 public class AppConfig {
 
-    @Singleton
+    /**
+     * Initializes a {@link ScheduledExecutorService} to run the lag collector job
+     * in
+     * 
+     * @param applicationProperties
+     * @return {@link ScheduledExecutorService}
+     */
     @Named("lagMonitorScheduler")
+    @Singleton
     public ScheduledExecutorService lagMonitorScheduler(ApplicationProperties applicationProperties) {
         return Executors.newScheduledThreadPool(applicationProperties.getLagMonitor().getThreadpoolSize());
     }

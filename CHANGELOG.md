@@ -4,6 +4,9 @@
 ### Added
 - Spotless gradle plugin to format code
 
+### Changed
+- `/influx/metrics` endpoint to work correctly when metrics are reported in multiple batches
+
 ## [0.1.1] - 2021-03-30
 ### Changed
 - [#9](https://github.com/devatherock/kafka-lag-monitor/issues/9): Fixed performance issues due to the lag collector job running in the event loop
