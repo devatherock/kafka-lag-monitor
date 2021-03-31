@@ -66,20 +66,7 @@ ext.jacoco = [
     exclusions: [
         'io/github/devatherock/Application.class',
         'io/github/devatherock/test/InfluxdbController.class'
-    ],
-    // TODO Remove once all tests have been written
-    coverageThresholds: [
-        'io.github.devatherock.scheduler.KafkaLagCollector': [
-            'BRANCH': 0.90,
-            'COMPLEXITY': 0.84,
-            'INSTRUCTION': 0.89,
-            'LINE': 0.84
-        ]
     ]
 ]
-
-File codeFormatter = new File('code-formatter.xml')
-codeFormatter.delete()
-codeFormatter << new URL('https://raw.githubusercontent.com/devatherock/gradle-includes/master/code-formatter.xml').text
 
 apply from: 'https://raw.githubusercontent.com/devatherock/gradle-includes/master/checks.gradle'
