@@ -6,9 +6,10 @@ plugins {
     id 'jacoco'
     id 'org.sonarqube' version '3.0'
     id 'com.github.kt3k.coveralls' version '2.10.2'
+    id 'com.diffplug.spotless' version '5.11.0'
 }
 
-version = "0.1.0"
+version = "0.1.2"
 group = "io.github.devatherock"
 
 repositories {
@@ -65,7 +66,6 @@ ext.jacoco = [
     exclusions: [
         'io/github/devatherock/Application.class',
         'io/github/devatherock/test/InfluxdbController.class',
-        
         // TODO Remove exclusions once tests have been written
         'io/github/devatherock/config/AppConfig.class'
     ],
@@ -79,4 +79,9 @@ ext.jacoco = [
         ]
     ]
 ]
+
+File codeFormatter = new File('code-formatter.xml')
+codeFormatter.delete()
+codeFormatter << new URL('https://raw.githubusercontent.com/devatherock/gradle-includes/master/code-formatter.xml').text
+
 apply from: 'https://raw.githubusercontent.com/devatherock/gradle-includes/master/checks.gradle'

@@ -26,6 +26,7 @@ import org.apache.kafka.common.TopicPartition;
 
 import io.github.devatherock.config.ApplicationProperties;
 import io.github.devatherock.config.ApplicationProperties.LagMonitorConfig;
+
 import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micronaut.context.annotation.Context;
