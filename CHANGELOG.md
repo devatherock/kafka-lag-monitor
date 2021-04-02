@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - Spotless gradle plugin to format code
+- Support for JSON logs
 
 ### Changed
 - `/influx/metrics` endpoint to work correctly when metrics are reported in multiple batches
