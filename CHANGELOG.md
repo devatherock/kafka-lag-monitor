@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [0.2.0] - 2021-04-01
 ### Added
 - Spotless gradle plugin to format code
 - Support for JSON logs
