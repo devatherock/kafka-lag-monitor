@@ -1,10 +1,11 @@
 package io.github.devatherock.scheduler
 
-import io.github.devatherock.config.ApplicationProperties
-import io.github.devatherock.config.ApplicationProperties.LagMonitorConfig
-import io.micrometer.core.instrument.DistributionSummary
-import io.micrometer.core.instrument.MeterRegistry
-import io.micrometer.core.instrument.simple.SimpleMeterRegistry
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.ScheduledFuture
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.TimeoutException
+
 import org.apache.kafka.clients.admin.AdminClient
 import org.apache.kafka.clients.admin.ConsumerGroupListing
 import org.apache.kafka.clients.admin.ListConsumerGroupOffsetsResult
@@ -15,14 +16,15 @@ import org.apache.kafka.clients.admin.OffsetSpec
 import org.apache.kafka.clients.consumer.OffsetAndMetadata
 import org.apache.kafka.common.KafkaFuture
 import org.apache.kafka.common.TopicPartition
+
+import io.github.devatherock.config.ApplicationProperties
+import io.github.devatherock.config.ApplicationProperties.LagMonitorConfig
+
+import io.micrometer.core.instrument.DistributionSummary
+import io.micrometer.core.instrument.MeterRegistry
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import spock.lang.Specification
 import spock.lang.Subject
-
-import java.util.concurrent.Executors
-import java.util.concurrent.ScheduledExecutorService
-import java.util.concurrent.ScheduledFuture
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
 
 /**
  * Test class for {@link KafkaLagCollector}

@@ -1,9 +1,9 @@
 package io.github.devatherock.config
 
+import java.util.concurrent.ScheduledExecutorService
+
 import spock.lang.Specification
 import spock.lang.Subject
-
-import java.util.concurrent.ScheduledExecutorService
 
 /**
  * Test class for {@link AppConfig}

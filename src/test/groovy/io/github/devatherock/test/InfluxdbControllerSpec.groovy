@@ -1,5 +1,7 @@
 package io.github.devatherock.test
 
+import javax.inject.Inject
+
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.MediaType
 import io.micronaut.http.client.HttpClient
@@ -7,8 +9,6 @@ import io.micronaut.http.client.annotation.Client
 import io.micronaut.http.uri.UriBuilder
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
 import spock.lang.Specification
-
-import javax.inject.Inject
 
 /**
  * Test class for {@link InfluxdbController}
