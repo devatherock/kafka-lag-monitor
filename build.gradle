@@ -45,7 +45,7 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
     runtimeOnly("ch.qos.logback:logback-classic")
 
-    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.8.0'
+    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.8.1'
     implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '6.6'
 
     testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
