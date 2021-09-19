@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Changed
 - chore(deps): update dependency org.apache.kafka:kafka-clients to v2.8.1
+- chore(deps): update plugin io.micronaut.application to v2.0.5
 
 ## [0.2.0] - 2021-04-01
 ### Added
