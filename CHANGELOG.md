@@ -7,6 +7,7 @@
 - chore: Added changelog-updater for creating missed changelog entries
 - chore(deps): update plugin com.diffplug.spotless to v5.15.1
 - chore(deps): update plugin io.micronaut.application to v2.0.6
+- chore(deps): update dependency org.projectlombok:lombok to v1.18.22
 
 ## [0.2.0] - 2021-04-01
 ### Added
