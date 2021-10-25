@@ -27,7 +27,7 @@ micronaut {
 }
 
 dependencies {
-    def lombokVersion = '1.18.20'
+    def lombokVersion = '1.18.22'
 
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     annotationProcessor("io.micronaut.openapi:micronaut-openapi")
