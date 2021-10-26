@@ -33,11 +33,11 @@ executors:
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
-    <<: *resource_class
+    resource_class: medium
     <<: *work_directory
     environment:
       # To generate swagger UI
-      JAVA_TOOL_OPTIONS: '-Dmicronaut.openapi.views.spec=swagger-ui.enabled=true,swagger-ui.theme=flattop'
+      JAVA_TOOL_OPTIONS: '-Xmx1024m -Dmicronaut.openapi.views.spec=swagger-ui.enabled=true,swagger-ui.theme=flattop'
   docker-executor:
     docker:
       - image: cimg/openjdk:11.0

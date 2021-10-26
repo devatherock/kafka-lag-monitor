@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- `dependencycheck` gradle plugin to detect vulnerable dependencies
+
 ### Changed
 - chore(deps): update dependency org.apache.kafka:kafka-clients to v2.8.1
 - chore(deps): update plugin io.micronaut.application to v2.0.5
@@ -8,6 +11,9 @@
 - chore(deps): update plugin com.diffplug.spotless to v5.15.1
 - chore(deps): update plugin io.micronaut.application to v2.0.6
 - chore(deps): update dependency org.projectlombok:lombok to v1.18.22
+
+### Removed
+- [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
 
 ## [0.2.0] - 2021-04-01
 ### Added
