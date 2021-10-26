@@ -33,7 +33,7 @@ executors:
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
-    <<: *resource_class
+    resource_class: medium
     <<: *work_directory
     environment:
       # To generate swagger UI
