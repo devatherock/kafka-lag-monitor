@@ -26,6 +26,9 @@ import lombok.Setter;
 @Context
 @ConfigurationProperties("kafka")
 public class ApplicationProperties {
+    /**
+     * A list of kafka cluster definitions
+     */
     @NotEmpty
     private List<ClusterConfig> clusters = new ArrayList<>();
 
@@ -41,6 +44,9 @@ public class ApplicationProperties {
     @Setter
     @ConfigurationProperties("lag-monitor")
     public static class LagMonitorProperties {
+        /**
+         * A list of cluster level lag monitor definitions
+         */
         @NotEmpty
         private List<LagMonitorConfig> clusters = new ArrayList<>();
 
@@ -50,7 +56,7 @@ public class ApplicationProperties {
         private int threadpoolSize = 5;
 
         /**
-         * Timeout for the requests to Kafka
+         * Timeout for the requests to Kafka, in seconds
          */
         private int timeoutSeconds = 5;
     }
@@ -58,9 +64,16 @@ public class ApplicationProperties {
     @Getter
     @Setter
     public static class ClusterConfig {
+        /**
+         * Name of the cluster. The same name will be needed in
+         * {@code kafka.lag-monitor.clusters[*].name} config
+         */
         @NotBlank(message = "kafka.clusters[*].name not specified")
         private String name;
 
+        /**
+         * The server(s)/broker(s) that belong to this cluster
+         */
         @NotBlank(message = "kafka.clusters[*].servers not specified")
         private String servers;
     }
@@ -74,6 +87,10 @@ public class ApplicationProperties {
     @Getter
     @Setter
     public static class LagMonitorConfig {
+        /**
+         * Name of the cluster to monitor. Should be one of the defined
+         * {@code kafka.clusters[*].name}
+         */
         @NotBlank(message = "kafka.lag-monitor.clusters[*].name not specified")
         private String name;
 
