@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Added
 - `dependencycheck` gradle plugin to detect vulnerable dependencies
+- [#73](https://github.com/devatherock/kafka-lag-monitor/issues/73): Documented configurable properties and environment variables
 
 ### Changed
 - chore(deps): update dependency org.apache.kafka:kafka-clients to v2.8.1

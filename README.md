@@ -73,6 +73,43 @@ docker run --rm \
         devatherock/kafka-lag-monitor:latest
 ```
 
+## Configurable properties
+
+### application.yml variables
+
+```yaml
+kafka:
+  clusters: # Required. A list of kafka cluster definitions
+    - name: test-cluster # Required. Name of the cluster. The same name will be needed in `kafka.lag-monitor.clusters[*].name` config. 
+      servers: test-cluster.test.com:9092 # Required. The server(s)/broker(s) that belong to this cluster
+  lag-monitor:
+    clusters:
+      - name: test-cluster # Required. Name of the cluster to monitor. Should be one of the defined `kafka.clusters[*].name`
+        consumer-groups: # Optional. List of consumer group names to monitor. Names will be matched exactly. Use `group-allowlist` for regex match
+          - test-consumer
+        group-allowlist: # Optional. List of regular expressions to match against consumer group names to monitor. Will be ignored if `consumer-groups` is specified
+          - deva.*
+        group-denylist: # Optional. List of regular expressions to match against consumer group names to exclude. Will be ignored if `consumer-groups` or `group-allowlist` is specified
+          - temp.*
+    threadpool-size: 5 # Optional. Size of the thread pool used by the lag monitor. Defaults to 5
+    timeout-seconds: 5 # Optional. Timeout for the requests to Kafka, in seconds. Defaults to 5
+micronaut:
+  server:
+    port: 8080 # Optional. Port in which the app listens on
+```
+
+### Environment variables
+
+| Environment Variable Name             |   Required   |   Default        |   Description                                                  |
+|---------------------------------------|--------------|------------------|----------------------------------------------------------------|
+| KAFKA_LAG_MONITOR_THREADPOOL_SIZE     |    false     |   5              |   Size of the thread pool used by the lag monitor              |
+| KAFKA_LAG_MONITOR_TIMEOUT_SECONDS     |    false     |   5              |   Timeout for the requests to Kafka, in seconds                |
+| LOGGER_LEVELS_ROOT                    |    false     |   INFO           |   [SLF4J](http://www.slf4j.org/api/org/apache/commons/logging/Log.html) log level, for all(framework and custom) code  |
+| LOGGER_LEVELS_IO_GITHUB_DEVATHEROCK   |    false     |   INFO           |   [SLF4J](http://www.slf4j.org/api/org/apache/commons/logging/Log.html) log level, for custom code  |
+| MICRONAUT_SERVER_PORT                 |    false     |   8080           |   Port in which the app listens on                              |
+| MICRONAUT_CONFIG_FILES                |    true      |   (None)         |   Path to YAML config files. The YAML files can be used to specify complex, object and array properties  |
+| JAVA_OPTS                             |    false     |   (None)         |   Additional JVM arguments to be passed to the container's java process  |
+
 ## Troubleshooting
 ### Enabling debug logs
 - Set the environment variable `LOGGER_LEVELS_ROOT` to `DEBUG` to enable all debug logs - custom and framework
