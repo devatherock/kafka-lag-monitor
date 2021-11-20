@@ -17,6 +17,7 @@
 - chore(deps): update dependency io.netty:netty-all to v4.1.70.final
 - chore(deps): update docker orb to v2
 - chore(deps): update docker orb to v2.0.1
+- chore(deps): update plugin org.owasp.dependencycheck to v6.5.0.1
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
