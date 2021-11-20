@@ -48,7 +48,7 @@ dependencies {
     implementation('io.netty:netty-all:4.1.70.Final')
 
     implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '2.8.1'
-    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '6.6'
+    implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '7.0.1'
 
     testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
     testAnnotationProcessor "io.micronaut:micronaut-inject-java"
