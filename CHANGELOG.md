@@ -16,6 +16,7 @@
 - chore(deps): update plugin com.diffplug.spotless to v6.0.1
 - chore(deps): updated logback to `1.2.10`
 - Upgraded micronaut to `3.4.1`
+- chore(deps): update dependency ch.qos.logback:logback-classic to v1.2.11
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
