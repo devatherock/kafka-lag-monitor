@@ -7,20 +7,15 @@
 
 ### Changed
 - chore(deps): update dependency org.apache.kafka:kafka-clients to v2.8.1
-- chore(deps): update plugin io.micronaut.application to v2.0.5
 - chore: Added changelog-updater for creating missed changelog entries
-- chore(deps): update plugin com.diffplug.spotless to v5.15.1
-- chore(deps): update plugin io.micronaut.application to v2.0.6
 - chore(deps): update dependency org.projectlombok:lombok to v1.18.22
 - chore(deps): update plugin io.micronaut.application to v2.0.8
-- chore(deps): update plugin com.diffplug.spotless to v5.17.1
-- chore(deps): update dependency io.netty:netty-all to v4.1.70.final
-- chore(deps): update docker orb to v2
 - chore(deps): update docker orb to v2.0.1
-- chore(deps): update plugin org.owasp.dependencycheck to v6.5.0.1
+- chore(deps): update plugin org.owasp.dependencycheck to 7.0.3
 - chore(deps): update dependency net.logstash.logback:logstash-logback-encoder to v7
-- chore(deps): update plugin com.diffplug.spotless to v6
 - chore(deps): update plugin com.diffplug.spotless to v6.0.1
+- chore(deps): updated logback to `1.2.10`
+- Upgraded micronaut to `3.4.1`
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
