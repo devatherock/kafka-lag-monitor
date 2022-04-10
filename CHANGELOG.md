@@ -20,6 +20,7 @@
 - chore(deps): update dependency gradle to v6.9.2
 - chore(deps): update docker orb to v2.0.3
 - chore(deps): update plugin org.owasp.dependencycheck to v7.0.4.1
+- chore(deps): update dependency net.logstash.logback:logstash-logback-encoder to v7.1
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
