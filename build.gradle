@@ -12,6 +12,8 @@ plugins {
 
 version = "0.3.0"
 group = "io.github.devatherock"
+sourceCompatibility = '11'
+targetCompatibility = '11'
 
 repositories {
     mavenCentral()
