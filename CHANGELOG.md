@@ -36,6 +36,7 @@
 - chore(deps): update dependency net.logstash.logback:logstash-logback-encoder to v7.2
 - chore(deps): update dependency io.micronaut:micronaut-bom to v3.5.0
 - chore(deps): update dependency io.micronaut:micronaut-bom to v3.5.1
+- chore(deps): update plugin com.diffplug.spotless to v6.7.1
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
