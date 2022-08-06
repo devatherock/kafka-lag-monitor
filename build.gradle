@@ -62,7 +62,7 @@ dependencies {
 
     testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.1-groovy-3.0'
     testImplementation group: 'cglib', name: 'cglib-nodep', version: '3.3.0'
-    testImplementation group: 'org.objenesis', name: 'objenesis', version: '3.2'
+    testImplementation group: 'org.objenesis', name: 'objenesis', version: '3.3'
 }
 
 application {
