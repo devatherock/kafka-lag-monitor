@@ -51,6 +51,7 @@
 - feat: Updated changelog updater user
 - chore(deps): update docker orb to v2.1.4
 - chore(deps): update dependency gradle to v6.9.3
+- fix(deps): update dependency io.micronaut:micronaut-bom to v3.7.3
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
