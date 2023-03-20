@@ -59,6 +59,7 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.14.1
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.4.5
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.3.1
+- chore(deps): update plugin org.owasp.dependencycheck to v8.1.2
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
