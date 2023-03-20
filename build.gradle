@@ -7,7 +7,7 @@ plugins {
     id 'org.sonarqube' version '3.5.0.2730'
     id 'com.github.kt3k.coveralls' version '2.12.0'
     id 'com.diffplug.spotless' version '6.5.2'
-    id 'org.owasp.dependencycheck' version '7.4.4'
+    id 'org.owasp.dependencycheck' version '8.1.2'
 }
 
 version = "0.3.0"
@@ -59,7 +59,7 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
 
     implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '7.2'
-    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.3.1'
+    implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.4.0'
     implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 
     runtimeOnly("ch.qos.logback:logback-classic:1.4.5")
