@@ -61,6 +61,7 @@
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.3.1
 - chore(deps): update plugin org.owasp.dependencycheck to v8.1.2
 - chore(deps): update dependency gradle to v6.9.4
+- chore(deps): update plugin com.github.kt3k.coveralls to v2.12.2
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
