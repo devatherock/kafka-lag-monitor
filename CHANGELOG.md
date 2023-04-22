@@ -68,6 +68,7 @@
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.26
 - fix(deps): update dependency io.micronaut:micronaut-bom to v3.8.9
 - chore(deps): update docker orb to v2.2.0
+- fix(deps): update dependency ch.qos.logback:logback-classic to v1.4.7
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
