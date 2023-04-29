@@ -25,6 +25,7 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.15.0
 - fix(deps): update dependency org.jsoup:jsoup to v1.16.1
 - feat: Upgraded gradle to 7.6.1
+- chore(deps): update dependency gradle to v8
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
