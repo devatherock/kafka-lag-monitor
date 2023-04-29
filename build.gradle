@@ -1,5 +1,5 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "2.0.8"
     id 'java'
     id 'groovy'
@@ -21,7 +21,6 @@ repositories {
 
 micronaut {
     runtime("netty")
-    testRuntime("junit5")
     processing {
         incremental(true)
         annotations("io.github.devatherock.*")
@@ -77,6 +76,10 @@ dependencies {
 
 application {
     mainClass.set("io.github.devatherock.Application")
+}
+
+test {
+    useJUnitPlatform()
 }
 
 run {
