@@ -14,7 +14,6 @@
 - chore(deps): update plugin com.diffplug.spotless to v6.5.2
 - fix(deps): update dependency org.objenesis:objenesis to v3.3
 - feat: Updated changelog updater user
-- chore(deps): update plugin org.sonarqube to v3.5.0.2730
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.3.1
 - chore(deps): update plugin com.github.kt3k.coveralls to v2.12.2
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.26
@@ -24,7 +23,8 @@
 - fix(deps): update dependency io.micronaut:micronaut-bom to v3.9.1
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.15.0
 - fix(deps): update dependency org.jsoup:jsoup to v1.16.1
-- feat: Upgraded gradle to 7.6.1
+- chore(deps): update dependency gradle to v8
+- Updated sonar gradle plugin to `4.0.0.2929`
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut

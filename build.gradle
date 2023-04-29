@@ -1,10 +1,10 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
     id("io.micronaut.application") version "2.0.8"
     id 'java'
     id 'groovy'
     id 'jacoco'
-    id 'org.sonarqube' version '3.5.0.2730'
+    id 'org.sonarqube' version '4.0.0.2929'
     id 'com.github.kt3k.coveralls' version '2.12.2'
     id 'com.diffplug.spotless' version '6.5.2'
     id 'org.owasp.dependencycheck' version '8.2.1'
@@ -21,7 +21,6 @@ repositories {
 
 micronaut {
     runtime("netty")
-    testRuntime("junit5")
     processing {
         incremental(true)
         annotations("io.github.devatherock.*")
@@ -77,6 +76,10 @@ dependencies {
 
 application {
     mainClass.set("io.github.devatherock.Application")
+}
+
+test {
+    useJUnitPlatform()
 }
 
 run {
