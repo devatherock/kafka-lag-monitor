@@ -11,7 +11,6 @@
 - chore(deps): update dependency org.spockframework:spock-core to v2.1-groovy-3.0
 - chore(deps): update dependency cimg/openjdk to v17
 - chore: Used custom ssh key to push to github
-- chore(deps): update plugin com.diffplug.spotless to v6.5.2
 - fix(deps): update dependency org.objenesis:objenesis to v3.3
 - feat: Updated changelog updater user
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.3.1
@@ -25,6 +24,8 @@
 - fix(deps): update dependency org.jsoup:jsoup to v1.16.1
 - chore(deps): update dependency gradle to v8
 - Updated sonar gradle plugin to `4.0.0.2929`
+- Upgraded spotless to `6.18.0`
+- Upgraded to Java 17
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
