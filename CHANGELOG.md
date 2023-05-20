@@ -26,6 +26,7 @@
 - Updated sonar gradle plugin to `4.0.0.2929`
 - Upgraded spotless to `6.18.0`
 - Upgraded to Java 17
+- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.15.1
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
