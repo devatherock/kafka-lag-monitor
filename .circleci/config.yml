@@ -103,6 +103,20 @@ jobs:
       - store_test_results:
           path: build/test-results
 
+  dockerhub_readme:
+    machine:
+      image: ubuntu-2204:2023.04.2
+    steps:
+      - checkout
+      - run: |
+          docker run -v $PWD:/workspace \
+              -e DOCKERHUB_USERNAME \
+              -e DOCKERHUB_PASSWORD \
+              -e DOCKERHUB_REPOSITORY='devatherock/kafka-lag-monitor' \
+              -e SHORT_DESCRIPTION='Monitors kafka lag and publishes the metrics to different metrics backends' \
+              -e README_FILEPATH='/workspace/README.md' \
+              peterevans/dockerhub-description:3.4.1
+
   publish_release:
     executor: docker-executor
     steps:
@@ -151,12 +165,18 @@ workflows:
           tag: "${CIRCLE_SHA1:0:8},latest"
           use-remote-docker: true
           docker-username: DOCKER_USERNAME
+      - dockerhub_readme:
+          context:
+            - docker-credentials
+            - dockerhub-readme-credentials
+          requires:
+            - publish
       - notify:
           context:
             - docker-credentials
             - slack-webhook
           requires:
-            - publish
+            - dockerhub_readme
   release:
     jobs:
       - publish_release:
