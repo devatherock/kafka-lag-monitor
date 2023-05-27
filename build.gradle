@@ -4,7 +4,7 @@ plugins {
     id 'java'
     id 'groovy'
     id 'jacoco'
-    id 'org.sonarqube' version '4.0.0.2929'
+    id 'org.sonarqube' version '4.1.0.3113'
     id 'com.github.kt3k.coveralls' version '2.12.2'
     id 'com.diffplug.spotless' version '6.19.0'
     id 'org.owasp.dependencycheck' version '8.2.1'
