@@ -28,6 +28,7 @@
 - fix(deps): update dependency io.micronaut:micronaut-bom to v3.9.2
 - Updated dockerhub readme in CI pipeline
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.28
+- chore(deps): update plugin com.diffplug.spotless to v6.19.0
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
