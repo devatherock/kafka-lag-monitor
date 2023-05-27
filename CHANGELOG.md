@@ -19,8 +19,6 @@
 - chore(deps): update docker orb to v2.2.0
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.4.7
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v7.3
-- fix(deps): update dependency io.micronaut:micronaut-bom to v3.9.1
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.15.0
 - fix(deps): update dependency org.jsoup:jsoup to v1.16.1
 - chore(deps): update dependency gradle to v8
 - Updated sonar gradle plugin to `4.0.0.2929`
@@ -28,6 +26,7 @@
 - Upgraded to Java 17
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.15.1
 - fix(deps): update dependency io.micronaut:micronaut-bom to v3.9.2
+- Updated dockerhub readme in CI pipeline
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut

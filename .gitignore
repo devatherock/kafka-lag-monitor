@@ -16,3 +16,4 @@ bin/
 *.hprof
 code-formatter.xml
 checkstyle.xml
+codenarc.xml
