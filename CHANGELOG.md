@@ -31,6 +31,7 @@
 - chore(deps): update plugin com.diffplug.spotless to v6.19.0
 - chore(deps): update plugin org.sonarqube to v4.1.0.3113
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.15.2
+- chore(deps): update plugin org.sonarqube to v4.2.0.3129
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
