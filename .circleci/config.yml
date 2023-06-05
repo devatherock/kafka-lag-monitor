@@ -33,7 +33,7 @@ executors:
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
-    resource_class: medium
+    resource_class: small
     <<: *work_directory
     environment:
       # To generate swagger UI
@@ -106,6 +106,7 @@ jobs:
   dockerhub_readme:
     machine:
       image: ubuntu-2204:2023.04.2
+      resource_class: medium
     steps:
       - checkout
       - run: |
@@ -127,7 +128,7 @@ jobs:
       - run: |
           TAG=${CIRCLE_TAG#v}
           DEV_TAG=${CIRCLE_SHA1:0:8}
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
           docker pull devatherock/kafka-lag-monitor:$DEV_TAG
           docker tag devatherock/kafka-lag-monitor:$DEV_TAG devatherock/kafka-lag-monitor:$TAG
           docker push devatherock/kafka-lag-monitor:$TAG

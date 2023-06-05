@@ -9,7 +9,6 @@
 - chore: Added changelog-updater for creating missed changelog entries
 - chore(deps): update plugin io.micronaut.application to v2.0.8
 - chore(deps): update dependency org.spockframework:spock-core to v2.1-groovy-3.0
-- chore(deps): update dependency cimg/openjdk to v17
 - chore: Used custom ssh key to push to github
 - fix(deps): update dependency org.objenesis:objenesis to v3.3
 - feat: Updated changelog updater user
@@ -21,8 +20,8 @@
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v7.3
 - fix(deps): update dependency org.jsoup:jsoup to v1.16.1
 - chore(deps): update dependency gradle to v8
-- Updated sonar gradle plugin to `4.0.0.2929`
-- Upgraded spotless to `6.18.0`
+- Updated sonar gradle plugin to `4.2.0.3129`
+- Upgraded spotless to `6.19.0`
 - Upgraded to Java 17
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.15.1
 - fix(deps): update dependency io.micronaut:micronaut-bom to v3.9.2
