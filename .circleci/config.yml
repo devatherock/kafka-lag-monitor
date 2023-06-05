@@ -33,7 +33,7 @@ executors:
         auth:
           username: $DOCKER_USERNAME
           password: $DOCKER_PASSWORD
-    resource_class: medium
+    resource_class: small
     <<: *work_directory
     environment:
       # To generate swagger UI
@@ -86,22 +86,12 @@ jobs:
       - checkout
       - attach_workspace:
           at: ~/kafka-lag-monitor
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
-            - v1-dependencies
       - run: |
-          ./gradlew build coveralls sonar -Dsonar.login=$SONAR_TOKEN -Dgraalvm=true
-      - persist_to_workspace:
-          root: ~/kafka-lag-monitor
-          paths:
-            - build
+          ./gradlew build coveralls sonar -Dsonar.login=$SONAR_TOKEN
       - save_cache:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-      - store_test_results:
-          path: build/test-results
 
   dockerhub_readme:
     machine:
@@ -192,15 +182,10 @@ workflows:
             - publish_release
   pr_check:
     jobs:
-      - changelog_updater:
-          context:
-            - docker-credentials
-            - changelog-updater-credentials
-          <<: *pr_filter
-      - test:
+      - build:
           context:
             - docker-credentials
             - sonar-credentials
-          <<: *pr_filter
-          requires:
-            - changelog_updater
+          filters:
+            branches:
+              only: prune-cache

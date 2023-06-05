@@ -10,8 +10,8 @@ plugins {
     id 'org.owasp.dependencycheck' version '8.2.1'
 }
 
-version = "0.3.0"
-group = "io.github.devatherock"
+version = '0.3.0'
+group = 'io.github.devatherock'
 sourceCompatibility = '11'
 targetCompatibility = '11'
 
