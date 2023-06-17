@@ -34,6 +34,7 @@
 - fix(deps): update dependency io.micronaut:micronaut-bom to v3.9.3
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.4.1
 - chore(deps): update plugin org.sonarqube to v4.2.1.3168
+- fix(deps): update dependency ch.qos.logback:logback-classic to v1.4.8
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
