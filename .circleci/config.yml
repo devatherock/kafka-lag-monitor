@@ -1,9 +1,12 @@
+docker_auth: &docker_auth
+  auth:
+    username: $DOCKER_USERNAME
+    password: $DOCKER_PASSWORD
+
 slack_image: &slack_image
   docker:
     - image: devatherock/simple-slack:1.0.0
-      auth:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
+      <<: *docker_auth
 
 orbs:
   docker: circleci/docker@2.2.0
@@ -30,9 +33,7 @@ executors:
   jdk-executor:
     docker:
       - image: devatherock/graalvm:ol8-java17-22.1.0-5
-        auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+        <<: *docker_auth
     resource_class: small
     <<: *work_directory
     environment:
@@ -41,9 +42,7 @@ executors:
   docker-executor:
     docker:
       - image: cimg/openjdk:17.0
-        auth:
-          username: $DOCKER_USERNAME
-          password: $DOCKER_PASSWORD
+        <<: *docker_auth
     <<: *resource_class
     <<: *work_directory
 
@@ -52,9 +51,7 @@ jobs:
   changelog_updater:
     docker:
     - image: devatherock/changelog-updater:0.1.0
-      auth:
-        username: $DOCKER_USERNAME
-        password: $DOCKER_PASSWORD
+      <<: *docker_auth
     <<: *resource_class
     environment:
       VELA_BUILD_AUTHOR: "renovate[bot]"
@@ -78,8 +75,11 @@ jobs:
             - v1-dependencies
       - run: |
           ./gradlew check sonar -Dsonar.login=$SONAR_TOKEN -Dgraalvm=true
+      - store_artifacts:
+          path: build/reports
       - store_test_results:
           path: build/test-results
+
   build:
     executor: jdk-executor
     steps:
@@ -100,23 +100,27 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
+      - store_artifacts:
+          path: build/reports
       - store_test_results:
           path: build/test-results
 
   dockerhub_readme:
-    machine:
-      image: ubuntu-2204:2023.04.2
-      resource_class: medium
+    docker:
+      - image: peterevans/dockerhub-description:3.4.2
+        <<: *docker_auth
+    <<: *resource_class
+    <<: *work_directory
+    environment:
+      DOCKERHUB_REPOSITORY: 'devatherock/kafka-lag-monitor'
+      SHORT_DESCRIPTION: 'Monitors kafka lag and publishes the metrics to different metrics backends'
+      README_FILEPATH: README.md
     steps:
       - checkout
+      - attach_workspace:
+          at: ~/kafka-lag-monitor
       - run: |
-          docker run -v $PWD:/workspace \
-              -e DOCKERHUB_USERNAME \
-              -e DOCKERHUB_PASSWORD \
-              -e DOCKERHUB_REPOSITORY='devatherock/kafka-lag-monitor' \
-              -e SHORT_DESCRIPTION='Monitors kafka lag and publishes the metrics to different metrics backends' \
-              -e README_FILEPATH='/workspace/README.md' \
-              peterevans/dockerhub-description:3.4.1
+          sh /entrypoint.sh
 
   publish_release:
     executor: docker-executor

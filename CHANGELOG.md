@@ -9,9 +9,7 @@
 - chore: Added changelog-updater for creating missed changelog entries
 - chore(deps): update plugin io.micronaut.application to v2.0.8
 - chore(deps): update dependency org.spockframework:spock-core to v2.1-groovy-3.0
-- chore: Used custom ssh key to push to github
 - fix(deps): update dependency org.objenesis:objenesis to v3.3
-- feat: Updated changelog updater user
 - chore(deps): update plugin com.github.kt3k.coveralls to v2.12.2
 - chore(deps): update docker orb to v2.2.0
 - fix(deps): update dependency org.jsoup:jsoup to v1.16.1
@@ -27,7 +25,6 @@
 - chore(deps): update devatherock/simple-slack docker tag to v1
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v7.4
 - fix(deps): update dependency io.micronaut:micronaut-bom to v3.9.4
-- chore(deps): update plugin org.owasp.dependencycheck to v8.3.1
 - chore(deps): update dependency gradle to v8.2
 - Upgraded `snappy-java` to `1.1.10.1`
 
