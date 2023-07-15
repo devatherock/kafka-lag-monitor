@@ -171,22 +171,9 @@ workflows:
 
   pr_check:
     jobs:
-      - templates/changelog_updater:
-          name: changelog_updater
+      - templates/slack:
+          name: notify
           context:
             - docker-credentials
-            - changelog-updater-credentials
+            - slack-webhook
           <<: *pr_filter
-      - templates/yaml_validator:
-          name: validate_yamls
-          context:
-            - docker-credentials
-          work_dir: '~/<< pipeline.parameters.repo_name >>'
-          requires:
-            - changelog_updater
-      - test:
-          context:
-            - docker-credentials
-            - sonar-credentials
-          requires:
-            - validate_yamls
