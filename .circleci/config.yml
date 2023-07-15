@@ -3,14 +3,6 @@ docker_auth: &docker_auth
     username: $DOCKER_USERNAME
     password: $DOCKER_PASSWORD
 
-slack_image: &slack_image
-  docker:
-    - image: devatherock/simple-slack:1.0.0
-      <<: *docker_auth
-
-orbs:
-  docker: circleci/docker@2.2.0
-
 work_directory: &work_directory
   working_directory: ~/kafka-lag-monitor
 
@@ -28,6 +20,15 @@ pr_filter: &pr_filter
   filters:
     branches:
       ignore: master
+
+orbs:
+  docker: circleci/docker@2.2.0
+  templates: devatherock/circleci-templates@dev:alpha
+
+parameters:
+  repo_name:
+    type: string
+    default: "kafka-lag-monitor"
   
 executors:
   jdk-executor:
@@ -48,21 +49,6 @@ executors:
 
 version: 2.1
 jobs:
-  changelog_updater:
-    docker:
-    - image: devatherock/changelog-updater:0.1.0
-      <<: *docker_auth
-    <<: *resource_class
-    environment:
-      VELA_BUILD_AUTHOR: "renovate[bot]"
-      VELA_BUILD_AUTHOR_EMAIL: "29139614+renovate[bot]@users.noreply.github.com"
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "4a:86:fe:0e:c3:0e:ad:0d:1d:5c:3e:48:cf:28:39:5d"
-      - checkout
-      - run: sh /scripts/entry-point.sh
-
   test:
     executor: jdk-executor
     steps:
@@ -105,23 +91,6 @@ jobs:
       - store_test_results:
           path: build/test-results
 
-  dockerhub_readme:
-    docker:
-      - image: peterevans/dockerhub-description:3.4.2
-        <<: *docker_auth
-    <<: *resource_class
-    <<: *work_directory
-    environment:
-      DOCKERHUB_REPOSITORY: 'devatherock/kafka-lag-monitor'
-      SHORT_DESCRIPTION: 'Monitors kafka lag and publishes the metrics to different metrics backends'
-      README_FILEPATH: README.md
-    steps:
-      - checkout
-      - attach_workspace:
-          at: ~/kafka-lag-monitor
-      - run: |
-          sh /entrypoint.sh
-
   publish_release:
     executor: docker-executor
     steps:
@@ -137,27 +106,24 @@ jobs:
           docker tag devatherock/kafka-lag-monitor:$DEV_TAG devatherock/kafka-lag-monitor:$TAG
           docker push devatherock/kafka-lag-monitor:$TAG
 
-  notify:
-    <<: *slack_image
-    <<: *resource_class
-    environment:
-      TEXT: "Success: {{.CircleBuildUrl}} by {{.CircleUsername}}"
-      CHANNEL: general
-      TITLE: "Build completed"
-    steps:
-      - run: /bin/simpleslack -c "#33ad7f" || true
-
 workflows:
   version: 2.1
   build_publish:
     jobs:
+      - templates/yaml_validator:
+          name: validate_yamls
+          context:
+            - docker-credentials
+          work_dir: '~/<< pipeline.parameters.repo_name >>'
+          filters:
+            branches:
+              only: master
       - build:
           context:
             - docker-credentials
             - sonar-credentials
-          filters:
-            branches:
-              only: master
+          requires:
+            - validate_yamls
       - docker/publish:
           name: publish
           executor: docker-executor
@@ -170,42 +136,57 @@ workflows:
           tag: "${CIRCLE_SHA1:0:8},latest"
           use-remote-docker: true
           docker-username: DOCKER_USERNAME
-      - dockerhub_readme:
+      - templates/dockerhub_readme_update:
+          name: dockerhub_readme
           context:
             - docker-credentials
             - dockerhub-readme-credentials
+          docker_image: '<< pipeline.parameters.repo_name >>'
+          image_description: 'Monitors kafka lag and publishes the metrics to different metrics backends'
+          work_dir: '~/<< pipeline.parameters.repo_name >>'
           requires:
             - publish
-      - notify:
+      - templates/slack:
+          name: notify
           context:
             - docker-credentials
             - slack-webhook
           requires:
             - dockerhub_readme
+
   release:
     jobs:
       - publish_release:
           context:
             - docker-credentials
           <<: *release_filter
-      - notify:
+      - templates/slack:
+          name: notify
           context:
             - docker-credentials
             - slack-webhook
           <<: *release_filter
           requires:
             - publish_release
+
   pr_check:
     jobs:
-      - changelog_updater:
+      - templates/changelog_updater:
+          name: changelog_updater
           context:
             - docker-credentials
             - changelog-updater-credentials
           <<: *pr_filter
+      - templates/yaml_validator:
+          name: validate_yamls
+          context:
+            - docker-credentials
+          work_dir: '~/<< pipeline.parameters.repo_name >>'
+          requires:
+            - changelog_updater
       - test:
           context:
             - docker-credentials
             - sonar-credentials
-          <<: *pr_filter
           requires:
-            - changelog_updater
+            - validate_yamls
