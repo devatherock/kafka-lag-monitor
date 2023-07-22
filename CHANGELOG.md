@@ -31,6 +31,7 @@
 - chore(deps): update dependency gradle to v8.2.1
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.2
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.5.1
+- fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.3
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
