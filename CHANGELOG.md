@@ -44,6 +44,7 @@
 - chore(deps): update plugin com.diffplug.spotless to v6.21.0
 - chore(deps): update plugin org.owasp.dependencycheck to v8.4.0
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.30
+- fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.5
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
