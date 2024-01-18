@@ -59,6 +59,16 @@ public class ApplicationProperties {
          * Timeout for the requests to Kafka, in seconds
          */
         private int timeoutSeconds = 5;
+
+        /**
+         * Initial delay before metric collection begins, in seconds
+         */
+        private int initialDelaySeconds = 60;
+
+        /**
+         * Metric collection interval, in seconds
+         */
+        private int intervalSeconds = 60;
     }
 
     @Getter

@@ -1,0 +1,14 @@
+micronaut:
+  metrics:
+    export:
+      influx:
+        uri: 'http://localhost:8080/influx'
+kafka:
+  clusters:
+    - name: test-cluster
+      servers: kafka:9093
+  lag-monitor:
+    initial-delay-seconds: 1
+    interval-seconds: 10
+    clusters:
+      - name: test-cluster

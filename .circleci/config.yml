@@ -46,6 +46,11 @@ executors:
         <<: *docker_auth
     <<: *resource_class
     <<: *work_directory
+  machine-executor:
+    machine:
+      image: ubuntu-2204:2023.04.2
+    resource_class: medium
+    <<: *work_directory
 
 version: 2.1
 jobs:
@@ -88,6 +93,30 @@ jobs:
           key: v1-dependencies-{{ checksum "build.gradle" }}
       - store_artifacts:
           path: build/reports
+      - store_test_results:
+          path: build/test-results
+
+  integration_test:
+    parameters:
+      command_args:
+        type: string
+      runner:
+        type: executor
+    executor: << parameters.runner >>
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/kafka-lag-monitor
+      - restore_cache:
+          keys:
+            - v1-integration-{{ checksum "build.gradle" }}
+            - v1-integration
+      - run: |
+          make integration-test << parameters.command_args >>
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-integration-{{ checksum "build.gradle" }}
       - store_test_results:
           path: build/test-results
 
@@ -146,13 +175,21 @@ workflows:
           work_dir: '~/<< pipeline.parameters.repo_name >>'
           requires:
             - publish
+      - integration_test:
+          name: integration_test_amd
+          context:
+            - docker-credentials
+          runner: machine-executor
+          command_args: ''
+          requires:
+            - dockerhub_readme
       - templates/slack:
           name: notify
           context:
             - docker-credentials
             - slack-webhook
           requires:
-            - dockerhub_readme
+            - integration_test_amd
 
   release:
     jobs:

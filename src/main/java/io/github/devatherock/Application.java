@@ -3,8 +3,11 @@ package io.github.devatherock;
 import io.micronaut.runtime.Micronaut;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
 
-@OpenAPIDefinition(info = @Info(title = "kafka-lag-monitor", version = "0.0"))
+@OpenAPIDefinition(info = @Info(title = "kafka-lag-monitor", version = "v1"), servers = {
+        @Server(url = "http://localhost:8080", description = "The server where the application is hosted. Defaulted to localhost")
+})
 public class Application {
 
     public static void main(String[] args) {

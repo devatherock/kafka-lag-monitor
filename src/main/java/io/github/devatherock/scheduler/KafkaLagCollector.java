@@ -34,9 +34,8 @@ import lombok.extern.slf4j.Slf4j;
 
 /**
  * Class to collect kafka lag periodically
- * 
- * @author devaprasadh
  *
+ * @author devaprasadh
  */
 @Slf4j
 @Context
@@ -78,20 +77,22 @@ public class KafkaLagCollector {
         for (LagMonitorConfig lagMonitorConfig : config.getLagMonitor().getClusters()) {
             if (!lagMonitorConfig.getConsumerGroups().isEmpty()) {
                 for (String groupId : lagMonitorConfig.getConsumerGroups()) {
-                    scheduler.scheduleAtFixedRate(() -> collectConsumerGroupLag(lagMonitorConfig.getName(), groupId), 1,
-                            1, TimeUnit.MINUTES);
+                    scheduler.scheduleWithFixedDelay(() -> collectConsumerGroupLag(lagMonitorConfig.getName(), groupId),
+                            config.getLagMonitor().getInitialDelaySeconds(),
+                            config.getLagMonitor().getIntervalSeconds(), TimeUnit.SECONDS);
                 }
             } else {
-                scheduler.scheduleAtFixedRate(() -> {
+                scheduler.scheduleWithFixedDelay(() -> {
                     collectConsumerGroupLag(lagMonitorConfig);
-                }, 1, 1, TimeUnit.MINUTES);
+                }, config.getLagMonitor().getInitialDelaySeconds(),
+                        config.getLagMonitor().getIntervalSeconds(), TimeUnit.SECONDS);
             }
         }
     }
 
     /**
      * Collects the lag for all allowed consumer groups in a cluster
-     * 
+     *
      * @param lagMonitorConfig
      */
     private void collectConsumerGroupLag(LagMonitorConfig lagMonitorConfig) {
@@ -120,7 +121,7 @@ public class KafkaLagCollector {
 
     /**
      * Collects the lag for a specific consumer group
-     * 
+     *
      * @param clusterName
      * @param groupId
      */
@@ -187,7 +188,7 @@ public class KafkaLagCollector {
 
     /**
      * Checks if the supplied consumer group name is allowed for monitoring
-     * 
+     *
      * @param config
      * @param consumerGroup
      * @return a flag

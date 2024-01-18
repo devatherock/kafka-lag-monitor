@@ -11,6 +11,14 @@ micronaut:
         enabled: true
         step: PT1M
     enabled: true
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger/views/swagger-ui
+        mapping: /swagger-ui/**
 endpoints:
   prometheus:
     sensitive: false    
