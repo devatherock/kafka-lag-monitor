@@ -7,6 +7,8 @@ integration-test:
 	./gradlew integrationTest
 	docker-compose -f docker-compose-integration.yml down
 build-all:
+	docker-compose up -d
 	./gradlew build -Dgraalvm=true
+	docker-compose down
 docker-build:
 	docker build -t devatherock/kafka-lag-monitor:$(docker_tag) .
