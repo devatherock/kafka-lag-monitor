@@ -22,7 +22,6 @@ pr_filter: &pr_filter
       ignore: master
 
 orbs:
-  docker: circleci/docker@2.2.0
   templates: devatherock/circleci-templates@0.4.0
 
 parameters:
@@ -96,6 +95,20 @@ jobs:
       - store_test_results:
           path: build/test-results
 
+  publish:
+    executor: docker-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - attach_workspace:
+          at: ~/kafka-lag-monitor
+      - run: |
+          TAG=${CIRCLE_SHA1:0:8}
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          docker build \
+            -t devatherock/kafka-lag-monitor:$TAG .
+          docker image push --all-tags devatherock/kafka-lag-monitor
+
   integration_test:
     parameters:
       command_args:
@@ -153,18 +166,11 @@ workflows:
             - sonar-credentials
           requires:
             - validate_yamls
-      - docker/publish:
-          name: publish
-          executor: docker-executor
+      - publish:
           context:
             - docker-credentials
           requires:
             - build
-          image: devatherock/kafka-lag-monitor
-          attach-at: ~/kafka-lag-monitor
-          tag: "${CIRCLE_SHA1:0:8},latest"
-          use-remote-docker: true
-          docker-username: DOCKER_USERNAME
       - templates/dockerhub_readme_update:
           name: dockerhub_readme
           context:
@@ -212,18 +218,11 @@ workflows:
           context:
             - docker-credentials
           <<: *pr_filter
-      - docker/publish:
-          name: publish
-          executor: docker-executor
+      - publish:
           context:
             - docker-credentials
           requires:
             - build
-          image: devatherock/kafka-lag-monitor
-          attach-at: ~/kafka-lag-monitor
-          tag: "${CIRCLE_SHA1:0:8}"
-          use-remote-docker: true
-          docker-username: DOCKER_USERNAME
       - integration_test:
           name: integration_test_amd
           context:
