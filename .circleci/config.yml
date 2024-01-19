@@ -82,7 +82,7 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies
       - run: |
-          ./gradlew build coveralls sonar -Dsonar.login=$SONAR_TOKEN -Dgraalvm=true
+          ./gradlew build -x test
       - persist_to_workspace:
           root: ~/kafka-lag-monitor
           paths:
@@ -208,22 +208,27 @@ workflows:
 
   pr_check:
     jobs:
-      - templates/changelog_updater:
-          name: changelog_updater
+      - build:
           context:
             - docker-credentials
-            - changelog-updater-credentials
           <<: *pr_filter
-      - templates/yaml_validator:
-          name: validate_yamls
+      - docker/publish:
+          name: publish
+          executor: docker-executor
           context:
             - docker-credentials
-          work_dir: '~/<< pipeline.parameters.repo_name >>'
           requires:
-            - changelog_updater
-      - test:
+            - build
+          image: devatherock/kafka-lag-monitor
+          attach-at: ~/kafka-lag-monitor
+          tag: "${CIRCLE_SHA1:0:8}"
+          use-remote-docker: true
+          docker-username: DOCKER_USERNAME
+      - integration_test:
+          name: integration_test_amd
           context:
             - docker-credentials
-            - sonar-credentials
+          runner: machine-executor
+          command_args: "docker_tag=${CIRCLE_SHA1:0:8}"
           requires:
-            - validate_yamls
+            - publish
