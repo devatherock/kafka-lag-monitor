@@ -65,7 +65,9 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies
       - run: |
-          make build-all
+          docker-compose up -d
+          ./gradlew build -Dgraalvm=true
+          docker-compose down
       - store_artifacts:
           path: build/reports
       - store_test_results:
