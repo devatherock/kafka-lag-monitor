@@ -1,0 +1,20 @@
+micronaut:
+  http.client.read-timeout: 30
+  metrics:
+    export:
+      prometheus:
+        enabled: false
+      influx:
+        enabled: false
+test:
+  server:
+    url: http://localhost:8080
+kafka:
+  clusters:
+    - name: dummy-cluster
+      servers: localhost:9092
+  lag-monitor:
+    clusters:
+      - name: dummy-cluster
+        consumer-groups:
+          - dummy-consumer

@@ -74,7 +74,7 @@ class KafkaLagCollectorSpec extends Specification {
         lagCollector.init()
 
         then: 'capture runnable lambda'
-        2 * mockScheduler.scheduleAtFixedRate(!null as Runnable, 1, 1, TimeUnit.MINUTES) >> { params ->
+        2 * mockScheduler.scheduleWithFixedDelay(!null as Runnable, 60, 60, TimeUnit.SECONDS) >> { params ->
             runnable = params[0]
             return Mock(ScheduledFuture)
         }
@@ -100,7 +100,7 @@ class KafkaLagCollectorSpec extends Specification {
         lagCollector.init()
 
         then:
-        2 * mockScheduler.scheduleAtFixedRate(!null as Runnable, 1, 1, TimeUnit.MINUTES) >> { params ->
+        2 * mockScheduler.scheduleWithFixedDelay(!null as Runnable, 60, 60, TimeUnit.SECONDS) >> { params ->
             runnable = params[0]
             return Mock(ScheduledFuture)
         }

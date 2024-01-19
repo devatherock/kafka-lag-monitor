@@ -93,6 +93,8 @@ kafka:
           - temp.*
     threadpool-size: 5 # Optional. Size of the thread pool used by the lag monitor. Defaults to 5
     timeout-seconds: 5 # Optional. Timeout for the requests to Kafka, in seconds. Defaults to 5
+    initial-delay-seconds: 60 # Optional. Initial delay before metric collection begins, in seconds. Defaults to 60
+    interval-seconds: 60 # Optional. Metric collection interval, in seconds. Defaults to 60
 micronaut:
   server:
     port: 8080 # Optional. Port in which the app listens on

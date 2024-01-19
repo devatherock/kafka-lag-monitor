@@ -1,0 +1,19 @@
+micronaut:
+  http.client.read-timeout: 30
+  server.port: 8091
+  metrics:
+    export:
+      influx:
+        uri: 'http://localhost:8091/influx'
+test:
+  server:
+    url: http://localhost:8091
+kafka:
+  clusters:
+    - name: test-cluster
+      servers: localhost:9092
+  lag-monitor:
+    initial-delay-seconds: 1
+    interval-seconds: 10
+    clusters:
+      - name: test-cluster

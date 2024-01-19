@@ -1,13 +1,12 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id 'io.micronaut.application' version '2.0.8'
+    id 'io.micronaut.application' version '3.7.10'
     id 'java'
     id 'groovy'
     id 'jacoco'
     id 'org.sonarqube' version '4.3.1.3277'
     id 'com.github.kt3k.coveralls' version '2.12.2'
     id 'com.diffplug.spotless' version '6.21.0'
-    id 'org.owasp.dependencycheck' version '8.4.0'
 }
 
 version = "0.3.0"
@@ -64,22 +63,18 @@ dependencies {
 
     runtimeOnly("ch.qos.logback:logback-classic:1.4.11")
 
-    testAnnotationProcessor platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testAnnotationProcessor "io.micronaut:micronaut-inject-java"
-    testImplementation "io.micronaut:micronaut-inject-groovy"
-    testImplementation platform("io.micronaut:micronaut-bom:$micronautVersion")
-    testImplementation "io.micronaut.test:micronaut-test-spock"
-
-    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.1-groovy-3.0'
-    testImplementation group: 'cglib', name: 'cglib-nodep', version: '3.3.0'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.3-groovy-3.0'
+    testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.14.10'
     testImplementation group: 'org.objenesis', name: 'objenesis', version: '3.3'
+    testImplementation group: 'io.micronaut', name: 'micronaut-inject-groovy'
+    testImplementation group: 'io.micronaut.test', name: 'micronaut-test-spock'
 }
 
 application {
     mainClass.set("io.github.devatherock.Application")
 }
 
-test {
+tasks.withType(Test) {
     useJUnitPlatform()
 }
 
@@ -95,4 +90,16 @@ ext.jacoco = [
     ]
 ]
 
-apply from: 'https://raw.githubusercontent.com/devatherock/gradle-includes/master/checks.gradle'
+apply from: "${getPropertyValue('gradle.includes.location', 'https://raw.githubusercontent.com/devatherock/gradle-includes/master')}/integration.gradle"
+apply from: "${getPropertyValue('gradle.includes.location', 'https://raw.githubusercontent.com/devatherock/gradle-includes/master')}/checks.gradle"
+
+/**
+ * Fetches the value of a gradle property
+ *
+ * @param propertyName
+ * @param propertyValueDefault
+ * @return the property value
+ */
+String getPropertyValue(String propertyName, String propertyValueDefault = null) {
+    return project.hasProperty(propertyName) ? project[propertyName] : propertyValueDefault
+}
