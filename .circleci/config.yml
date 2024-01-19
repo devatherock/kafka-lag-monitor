@@ -60,12 +60,8 @@ jobs:
       - setup_remote_docker
       - attach_workspace:
           at: ~/<< pipeline.parameters.repo_name >>
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "build.gradle" }}
-            - v1-dependencies
       - run: |
-          make build-all
+          make test
       - store_artifacts:
           path: build/reports
       - store_test_results:
