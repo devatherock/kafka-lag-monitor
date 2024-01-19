@@ -54,7 +54,7 @@ executors:
 version: 2.1
 jobs:
   test:
-    executor: jdk-executor
+    executor: docker-executor
     steps:
       - checkout
       - setup_remote_docker
@@ -65,9 +65,7 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies
       - run: |
-          docker-compose up -d
-          ./gradlew build -Dgraalvm=true
-          docker-compose down
+          make build-all
       - store_artifacts:
           path: build/reports
       - store_test_results:
