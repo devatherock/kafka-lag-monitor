@@ -2,7 +2,6 @@
 
 ## [Unreleased]
 ### Added
-- `dependencycheck` gradle plugin to detect vulnerable dependencies
 - [#73](https://github.com/devatherock/kafka-lag-monitor/issues/73): Documented configurable properties and environment variables
 - Used `circleci-templates` orb to simplify CI pipeline
 - [#172](https://github.com/devatherock/kafka-lag-monitor/issues/172): Added integration tests
@@ -11,7 +10,6 @@
 - chore: Added changelog-updater for creating missed changelog entries
 - fix(deps): update dependency org.objenesis:objenesis to v3.3
 - chore(deps): update plugin com.github.kt3k.coveralls to v2.12.2
-- chore(deps): update docker orb to v2.2.0
 - fix(deps): update dependency org.jsoup:jsoup to v1.16.1
 - Upgraded to Java 17
 - Updated dockerhub readme in CI pipeline
@@ -29,6 +27,7 @@
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
+- Docker orb
 
 ## [0.2.0] - 2021-04-01
 ### Added

@@ -22,7 +22,6 @@ pr_filter: &pr_filter
       ignore: master
 
 orbs:
-  docker: circleci/docker@2.2.0
   templates: devatherock/circleci-templates@0.4.0
 
 parameters:
@@ -96,6 +95,21 @@ jobs:
       - store_test_results:
           path: build/test-results
 
+  publish:
+    executor: docker-executor
+    steps:
+      - checkout
+      - setup_remote_docker
+      - attach_workspace:
+          at: ~/<< pipeline.parameters.repo_name >>
+      - run: |
+          TAG=${CIRCLE_SHA1:0:8}
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          docker build \
+            -t devatherock/<< pipeline.parameters.repo_name >>:$TAG \
+            -t devatherock/<< pipeline.parameters.repo_name >>:latest .
+          docker image push --all-tags devatherock/<< pipeline.parameters.repo_name >>
+
   integration_test:
     parameters:
       command_args:
@@ -106,7 +120,7 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: ~/kafka-lag-monitor
+          at: ~/<< pipeline.parameters.repo_name >>
       - restore_cache:
           keys:
             - v1-integration-{{ checksum "build.gradle" }}
@@ -153,18 +167,11 @@ workflows:
             - sonar-credentials
           requires:
             - validate_yamls
-      - docker/publish:
-          name: publish
-          executor: docker-executor
+      - publish:
           context:
             - docker-credentials
           requires:
             - build
-          image: devatherock/kafka-lag-monitor
-          attach-at: ~/kafka-lag-monitor
-          tag: "${CIRCLE_SHA1:0:8},latest"
-          use-remote-docker: true
-          docker-username: DOCKER_USERNAME
       - templates/dockerhub_readme_update:
           name: dockerhub_readme
           context:
