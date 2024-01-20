@@ -29,6 +29,7 @@ abstract class AdditionalControllerSpec extends Specification {
         endpoint << [
                 '/health',
                 '/metrics',
+                '/swagger-ui',
                 '/swagger/kafka-lag-monitor-v1.yml'
         ]
     }

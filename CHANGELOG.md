@@ -20,12 +20,12 @@
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.5.1
 - chore(deps): update dependency gradle to v8.3
 - chore(deps): update plugin org.sonarqube to v4.3.1.3277
-- chore(deps): update plugin com.diffplug.spotless to v6.21.0
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.30
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.5
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.4.14
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.16.1
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.11
+- Upgraded `spotless` to `6.24.0`
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
