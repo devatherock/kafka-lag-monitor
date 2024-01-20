@@ -76,6 +76,7 @@ application {
 
 tasks.withType(Test) {
     useJUnitPlatform()
+    environment('DOCKER_NETWORK_IP', System.getenv('DOCKER_NETWORK_IP') ?: 'localhost')
 }
 
 run {
