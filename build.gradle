@@ -76,6 +76,7 @@ application {
 
 tasks.withType(Test) {
     useJUnitPlatform()
+    logger.info("Docker network IP: {}", System.getenv('DOCKER_NETWORK_IP'))
     environment('DOCKER_NETWORK_IP', System.getenv('DOCKER_NETWORK_IP') ?: 'localhost')
 }
 

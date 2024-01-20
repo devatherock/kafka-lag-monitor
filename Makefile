@@ -1,5 +1,4 @@
 docker_tag=latest
-docker_network_ip=localhost
 
 clean:
 	./gradlew clean
@@ -8,14 +7,7 @@ integration-test:
 	./gradlew integrationTest
 	docker-compose -f docker-compose-integration.yml down
 test:
-	docker network create ci-network || true
-	docker network inspect ci-network
-	docker network inspect ci-network -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}'
-	@docker_ip=$$(docker network inspect ci-network -f '{{range .IPAM.Config}}{{.Gateway}}{{end}}') \
-	echo $${docker_ip}
-#	DOCKER_NETWORK_IP=$(docker_network_ip) docker-compose up &
-#	DOCKER_NETWORK_IP=$(docker_network_ip) ./gradlew test --tests '*test*prometheus*metrics*' -Dtest.logs=true -x jacocoTestCoverageVerification --info
-#	docker-compose down
+	./unit-tests.sh
 build-all:
 	docker-compose up -d
 	./gradlew build -Dgraalvm=true
