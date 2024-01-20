@@ -5,7 +5,8 @@
 - [#73](https://github.com/devatherock/kafka-lag-monitor/issues/73): Documented configurable properties and environment variables
 - Used `circleci-templates` orb to simplify CI pipeline
 - [#172](https://github.com/devatherock/kafka-lag-monitor/issues/172): Added integration tests
-- Unit test with kafka, to capture reflection config
+- [#222](https://github.com/devatherock/kafka-lag-monitor/issues/222): Built a graalvm native image
+- [#176](https://github.com/devatherock/kafka-lag-monitor/issues/176): Built separate x86 and arm64 docker images
 
 ### Changed
 - chore: Added changelog-updater for creating missed changelog entries
@@ -17,16 +18,11 @@
 - chore(deps): update devatherock/simple-slack docker tag to v1
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v7.4
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.5.1
-- chore(deps): update eclipse-temurin docker tag to v17.0.8_7-jre-alpine
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.4.11
 - chore(deps): update dependency gradle to v8.3
 - chore(deps): update plugin org.sonarqube to v4.3.1.3277
 - chore(deps): update plugin com.diffplug.spotless to v6.21.0
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.30
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.5
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.16.0
-- chore(deps): update eclipse-temurin docker tag to v17.0.9_9-jre-alpine
-- [#224](https://github.com/devatherock/kafka-lag-monitor/issues/224): Used kafka without zookeeper, in tests
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.4.14
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.16.1
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.11

@@ -1,0 +1,23 @@
+{
+  "rules": [
+    {"excludeClasses": "java.lang.Class"},
+    {"excludeClasses": "io.github.devatherock.logback.LogbackConfigInitializerSpec"},
+    {"excludeClasses": "io.github.devatherock.config.AppConfigSpec"},
+    {"excludeClasses": "io.github.devatherock.config.ApplicationPropertiesSpec"},
+    {"excludeClasses": "io.github.devatherock.controllers.AdditionalControllerSpec"},
+    {"excludeClasses": "io.github.devatherock.controllers.AdditionalControllerTestSpec"},
+    {"excludeClasses": "io.github.devatherock.scheduler.KafkaLagCollectorBaseSpec"},
+    {"excludeClasses": "io.github.devatherock.scheduler.KafkaLagCollectorSpec"},
+    {"excludeClasses": "io.github.devatherock.scheduler.KafkaLagCollectorTestSpec"},
+    {"excludeClasses": "io.github.devatherock.test.InfluxdbControllerSpec"},
+    {"excludeClasses": "io.micronaut.test.**"},
+    {"excludeClasses": "io.micronaut.http.client.**"},
+    {"excludeClasses": "org.spockframework.**"},
+    {"excludeClasses": "org.gradle.**"},
+    {"excludeClasses": "org.codehaus.groovy.**"},
+    {"excludeClasses": "groovy.lang.**"},
+    {"excludeClasses": "spock.**"},
+    {"excludeClasses": "org.objenesis.**"},
+    {"excludeClasses": "net.bytebuddy.**"}
+  ]
+}

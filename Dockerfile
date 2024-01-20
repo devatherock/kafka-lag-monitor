@@ -1,4 +1,18 @@
-FROM eclipse-temurin:17.0.9_9-jre-alpine
-COPY build/libs/kafka-lag-monitor-*-all.jar kafka-lag-monitor.jar
+FROM ghcr.io/graalvm/native-image-community:17-ol8 as graalvm
+
+COPY . /home/app/micronaut-graal-app
+WORKDIR /home/app/micronaut-graal-app
+
+RUN native-image -cp build/libs/*-all.jar
+
+
+
+FROM gcr.io/distroless/base-debian11:latest
+
+LABEL maintainer="devatherock@gmail.com"
+LABEL io.github.devatherock.version="1.0.0"
+
 EXPOSE 8080
-CMD java -Dcom.sun.management.jmxremote -noverify ${JAVA_OPTS} -jar kafka-lag-monitor.jar
+
+COPY --from=graalvm /home/app/micronaut-graal-app/micronautgraalapp /micronaut-graal-app/micronautgraalapp
+ENTRYPOINT ["/micronaut-graal-app/micronautgraalapp"]

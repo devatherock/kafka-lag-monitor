@@ -3,6 +3,15 @@ docker_auth: &docker_auth
     username: $DOCKER_USERNAME
     password: $DOCKER_PASSWORD
 
+docker_executor_image: &docker_executor_image
+  docker:
+    - image: cimg/openjdk:17.0
+      <<: *docker_auth
+
+vm_executor_image: &vm_executor_image
+  machine:
+    image: ubuntu-2204:2023.07.1
+
 work_directory: &work_directory
   working_directory: ~/kafka-lag-monitor
 
@@ -32,7 +41,7 @@ parameters:
 executors:
   jdk-executor:
     docker:
-      - image: devatherock/graalvm:ol8-java17-22.1.0-6
+      - image: devatherock/graalvm:17-ol8
         <<: *docker_auth
     <<: *resource_class
     <<: *work_directory
@@ -40,15 +49,24 @@ executors:
       # To generate swagger UI
       JAVA_TOOL_OPTIONS: '-Xmx1536m -Dmicronaut.openapi.views.spec=swagger-ui.enabled=true,swagger-ui.theme=flattop'
   docker-executor:
-    docker:
-      - image: cimg/openjdk:17.0
-        <<: *docker_auth
+    <<: *docker_executor_image
     <<: *resource_class
     <<: *work_directory
+  native-image-executor:
+    <<: *docker_executor_image
+    resource_class: large
+    <<: *work_directory
+  native-image-executor-arm:
+    <<: *vm_executor_image
+    resource_class: arm.large
+    <<: *work_directory
   machine-executor:
-    machine:
-      image: ubuntu-2204:2023.04.2
+    <<: *vm_executor_image
     resource_class: medium
+    <<: *work_directory
+  arm-executor:
+    <<: *vm_executor_image
+    resource_class: arm.medium
     <<: *work_directory
 
 version: 2.1
@@ -76,6 +94,7 @@ jobs:
     executor: jdk-executor
     steps:
       - checkout
+      - setup_remote_docker
       - attach_workspace:
           at: ~/kafka-lag-monitor
       - restore_cache:
@@ -99,7 +118,7 @@ jobs:
           path: build/test-results
 
   publish:
-    executor: docker-executor
+    executor: native-image-executor
     steps:
       - checkout
       - setup_remote_docker
@@ -110,7 +129,22 @@ jobs:
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
           docker build \
             -t devatherock/<< pipeline.parameters.repo_name >>:$TAG \
+            -t devatherock/<< pipeline.parameters.repo_name >>:amd64 \
             -t devatherock/<< pipeline.parameters.repo_name >>:latest .
+          docker image push --all-tags devatherock/<< pipeline.parameters.repo_name >>
+
+  publish_arm:
+    executor: native-image-executor-arm
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/<< pipeline.parameters.repo_name >>
+      - run: |
+          TAG=${CIRCLE_SHA1:0:8}-arm64
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          docker build \
+            -t devatherock/<< pipeline.parameters.repo_name >>:$TAG \
+            -t devatherock/<< pipeline.parameters.repo_name >>:arm64 .
           docker image push --all-tags devatherock/<< pipeline.parameters.repo_name >>
 
   integration_test:
@@ -143,14 +177,19 @@ jobs:
       - checkout
       - setup_remote_docker
       - attach_workspace:
-          at: ~/kafka-lag-monitor
+          at: ~/<< pipeline.parameters.repo_name >>
       - run: |
           TAG=${CIRCLE_TAG#v}
           DEV_TAG=${CIRCLE_SHA1:0:8}
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          docker pull devatherock/kafka-lag-monitor:$DEV_TAG
-          docker tag devatherock/kafka-lag-monitor:$DEV_TAG devatherock/kafka-lag-monitor:$TAG
-          docker push devatherock/kafka-lag-monitor:$TAG
+          docker pull devatherock/<< pipeline.parameters.repo_name >>:$DEV_TAG
+          docker tag devatherock/<< pipeline.parameters.repo_name >>:$DEV_TAG devatherock/<< pipeline.parameters.repo_name >>:$TAG
+          docker tag devatherock/<< pipeline.parameters.repo_name >>:$DEV_TAG devatherock/<< pipeline.parameters.repo_name >>:${TAG}-amd64
+          docker pull devatherock/<< pipeline.parameters.repo_name >>:${DEV_TAG}-arm64
+          docker tag devatherock/<< pipeline.parameters.repo_name >>:${DEV_TAG}-arm64 devatherock/<< pipeline.parameters.repo_name >>:${TAG}-arm64
+          docker push devatherock/<< pipeline.parameters.repo_name >>:$TAG
+          docker push devatherock/<< pipeline.parameters.repo_name >>:${TAG}-amd64
+          docker push devatherock/<< pipeline.parameters.repo_name >>:${TAG}-arm64
 
 workflows:
   version: 2.1
@@ -175,6 +214,11 @@ workflows:
             - docker-credentials
           requires:
             - build
+      - publish_arm:
+          context:
+            - docker-credentials
+          requires:
+            - build
       - templates/dockerhub_readme_update:
           name: dockerhub_readme
           context:
@@ -184,13 +228,21 @@ workflows:
           image_description: 'Monitors kafka lag and publishes the metrics to different metrics backends'
           work_dir: '~/<< pipeline.parameters.repo_name >>'
           requires:
-            - publish
+            - publish_arm
       - integration_test:
           name: integration_test_amd
           context:
             - docker-credentials
           runner: machine-executor
           command_args: ''
+          requires:
+            - publish
+      - integration_test:
+          name: integration_test_arm
+          context:
+            - docker-credentials
+          runner: arm-executor
+          command_args: 'docker_tag=arm64'
           requires:
             - dockerhub_readme
       - templates/slack:
@@ -200,6 +252,7 @@ workflows:
             - slack-webhook
           requires:
             - integration_test_amd
+            - integration_test_arm
 
   release:
     jobs:
