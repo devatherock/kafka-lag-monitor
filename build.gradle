@@ -61,7 +61,7 @@ dependencies {
     implementation group: 'org.xerial.snappy', name: 'snappy-java', version: '1.1.10.5'
     implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 
-    runtimeOnly("ch.qos.logback:logback-classic:1.4.11")
+    runtimeOnly("ch.qos.logback:logback-classic:1.4.14")
 
     testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.3-groovy-3.0'
     testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.14.10'
