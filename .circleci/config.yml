@@ -32,9 +32,9 @@ parameters:
 executors:
   jdk-executor:
     docker:
-      - image: devatherock/graalvm:ol8-java17-22.1.0-5
+      - image: devatherock/graalvm:ol8-java17-22.1.0-6
         <<: *docker_auth
-    resource_class: small
+    <<: *resource_class
     <<: *work_directory
     environment:
       # To generate swagger UI
@@ -57,14 +57,16 @@ jobs:
     executor: jdk-executor
     steps:
       - checkout
+      - setup_remote_docker
       - attach_workspace:
-          at: ~/kafka-lag-monitor
+          at: ~/<< pipeline.parameters.repo_name >>
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies
       - run: |
-          ./gradlew check sonar -Dsonar.login=$SONAR_TOKEN -Dgraalvm=true
+          make test
+          ./gradlew check sonar -x test -Dsonar.token=$SONAR_TOKEN -Dgraalvm=true
       - store_artifacts:
           path: build/reports
       - store_test_results:
@@ -81,7 +83,8 @@ jobs:
             - v1-dependencies-{{ checksum "build.gradle" }}
             - v1-dependencies
       - run: |
-          ./gradlew build coveralls sonar -Dsonar.login=$SONAR_TOKEN -Dgraalvm=true
+          make test
+          ./gradlew build coveralls sonar -x test -Dsonar.token=$SONAR_TOKEN -Dgraalvm=true
       - persist_to_workspace:
           root: ~/kafka-lag-monitor
           paths:

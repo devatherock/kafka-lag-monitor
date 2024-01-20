@@ -28,7 +28,7 @@ abstract class KafkaLagCollectorBaseSpec extends Specification {
 
     void setup() {
         def commonConfig = [
-                'bootstrap.servers': 'localhost:9092',
+                'bootstrap.servers': "${System.env.DOCKER_NETWORK_IP ?: 'localhost'}:9092".toString(),
         ]
 
         def producerConfig = new HashMap(commonConfig)

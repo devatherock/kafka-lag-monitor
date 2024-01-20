@@ -6,6 +6,8 @@ services:
       ALLOW_ANONYMOUS_LOGIN: 'yes'
     ports:
       - "2181:2181"
+    networks:
+      - ci-network
 
   kafka:
     image: bitnami/kafka:2.7.0
@@ -13,10 +15,12 @@ services:
       - zookeeper
     ports:
       - "9092:9092"
+    networks:
+      - ci-network
     environment:
       KAFKA_CFG_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_CFG_LISTENERS: INTERNAL://:9093,EXTERNAL://:9092
-      KAFKA_CFG_ADVERTISED_LISTENERS: INTERNAL://kafka:9093,EXTERNAL://localhost:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: INTERNAL://kafka:9093,EXTERNAL://${DOCKER_NETWORK_IP:-localhost}:9092
       KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
       ALLOW_PLAINTEXT_LISTENER: 'yes'
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: 'true'
@@ -26,7 +30,13 @@ services:
     image: bitnami/kafka:2.7.0
     depends_on:
       - kafka
+    networks:
+      - ci-network
     command: >
       bash -c "
         /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server kafka:9093 --replication-factor 1 --partitions 1 --topic test-topic
       "
+
+networks:
+  ci-network:
+    external: true

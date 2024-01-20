@@ -5,6 +5,7 @@
 - [#73](https://github.com/devatherock/kafka-lag-monitor/issues/73): Documented configurable properties and environment variables
 - Used `circleci-templates` orb to simplify CI pipeline
 - [#172](https://github.com/devatherock/kafka-lag-monitor/issues/172): Added integration tests
+- Unit test with kafka, to capture reflection config
 
 ### Changed
 - chore: Added changelog-updater for creating missed changelog entries

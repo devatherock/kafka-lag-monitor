@@ -11,7 +11,7 @@ test:
 kafka:
   clusters:
     - name: test-cluster
-      servers: localhost:9092
+      servers: ${DOCKER_NETWORK_IP:localhost}:9092
   lag-monitor:
     initial-delay-seconds: 1
     interval-seconds: 10
