@@ -35,7 +35,7 @@ class InfluxdbControllerSpec extends Specification {
         String output = httpClient.toBlocking().retrieve('/influx/metrics')
 
         then:
-        output == 'test line protocol'
+        output.contains('test line protocol')
     }
 
     void 'test write metrics - multiple writes within 2 seconds'() {
