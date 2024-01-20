@@ -28,6 +28,7 @@
 - chore(deps): update eclipse-temurin docker tag to v17.0.9_9-jre-alpine
 - [#224](https://github.com/devatherock/kafka-lag-monitor/issues/224): Used kafka without zookeeper, in tests
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.4.14
+- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.16.1
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
