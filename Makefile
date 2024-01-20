@@ -1,7 +1,7 @@
 docker_tag=latest
 
 clean:
-	./gradlew clean
+	rm -rf build
 integration-test:
 	DOCKER_TAG=$(docker_tag) docker-compose -f docker-compose-integration.yml up &
 	./gradlew integrationTest
@@ -10,6 +10,6 @@ test:
 	./unit-tests.sh
 build-all:
 	./unit-tests.sh
-	./gradlew build -x test -Dgraalvm=true
+	./gradlew build -x test
 docker-build:
 	docker build -t devatherock/kafka-lag-monitor:$(docker_tag) .

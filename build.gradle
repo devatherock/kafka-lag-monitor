@@ -60,8 +60,7 @@ dependencies {
     implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.5.1'
     implementation group: 'org.xerial.snappy', name: 'snappy-java', version: '1.1.10.5'
     implementation group: 'javax.inject', name: 'javax.inject', version: '1'
-
-    runtimeOnly("ch.qos.logback:logback-classic:1.4.14")
+    implementation("ch.qos.logback:logback-classic:1.4.14")
 
     testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.3-groovy-3.0'
     testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.14.11'
@@ -73,6 +72,17 @@ dependencies {
 application {
     mainClass.set("io.github.devatherock.Application")
 }
+
+test {
+    doFirst {
+        if (Boolean.getBoolean('graalvm')) {
+            jvmArgs("-agentlib:native-image-agent=access-filter-file=$projectDir/src/main/resources/graal/access-filter.json,config-output-dir=$projectDir/build/graal")
+        }
+    }
+}
+
+// Generates resource-config.json file for graalvm
+build.dependsOn(generateResourcesConfigFile)
 
 tasks.withType(Test) {
     useJUnitPlatform()
@@ -88,7 +98,15 @@ run {
 ext.jacoco = [
     exclusions: [
         'io/github/devatherock/Application.class'
-    ]
+    ],
+    coverageThresholds: [
+        'io.github.devatherock.logback.LogbackConfigInitializer': [
+            'BRANCH': 0.75,
+            'COMPLEXITY': 0.62,
+            'INSTRUCTION': 0.89,
+            'LINE': 0.88
+        ],
+    ],
 ]
 
 apply from: "${getPropertyValue('gradle.includes.location', 'https://raw.githubusercontent.com/devatherock/gradle-includes/master')}/integration.gradle"

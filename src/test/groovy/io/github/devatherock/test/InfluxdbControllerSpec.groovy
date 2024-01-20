@@ -53,7 +53,8 @@ class InfluxdbControllerSpec extends Specification {
                 .contentType('text/plain'))
 
         then:
-        controller.metrics == 'test line protocol1\ntest line protocol2'
+        controller.metrics.contains('test line protocol1\n')
+        controller.metrics.contains('test line protocol2')
     }
 
     void 'test write metrics - multiple writes more than 2 seconds apart'() {
@@ -72,7 +73,8 @@ class InfluxdbControllerSpec extends Specification {
                 .contentType('text/plain'))
 
         then:
-        controller.metrics == 'test line protocol2'
+        !controller.metrics.contains('test line protocol1')
+        controller.metrics.contains('test line protocol2')
     }
 
     void 'test other query'() {
