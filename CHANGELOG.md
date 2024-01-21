@@ -26,6 +26,7 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.16.1
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.11
 - Upgraded `spotless` to `6.24.0`
+- chore(deps): update dependency gradle to v8.5
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
