@@ -30,6 +30,7 @@
 - chore(deps): update plugin org.sonarqube to v4.4.1.3373
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.6.1
 - fix(deps): update dependency org.jsoup:jsoup to v1.17.2
+- chore(deps): update cimg/openjdk docker tag to v21
 
 ### Removed
 - [#56](https://github.com/devatherock/kafka-lag-monitor/issues/56): Custom environment variables with `LOGGING_LEVEL` prefix and updated documentation to use environment variables with `LOGGER_LEVELS` prefix supported out of the box by micronaut
