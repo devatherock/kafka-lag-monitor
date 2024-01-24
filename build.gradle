@@ -67,6 +67,7 @@ dependencies {
     testImplementation group: 'org.objenesis', name: 'objenesis', version: '3.3'
     testImplementation group: 'io.micronaut', name: 'micronaut-inject-groovy'
     testImplementation group: 'io.micronaut.test', name: 'micronaut-test-spock'
+    testImplementation group: 'org.influxdb', name: 'influxdb-java', version: '2.24'
 }
 
 application {
