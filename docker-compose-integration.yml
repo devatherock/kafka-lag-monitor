@@ -25,9 +25,15 @@ services:
         /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server kafka:9093 --replication-factor 1 --partitions 1 --topic test-topic
       "
 
+  influxdb:
+    image: influxdb:1.8.10-alpine
+    ports:
+      - "8086:8086"
+
   kafka-lag-monitor:
     image: devatherock/kafka-lag-monitor:${DOCKER_TAG:-latest}
     depends_on:
+      - influxdb
       - kafka-create-topics
     volumes:
       - ./src/integrationTest/resources/application-docker.yml:/config/application.yml

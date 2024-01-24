@@ -25,6 +25,10 @@
 
 ## [1.0.0] - 2024-01-22
 ### Added
+- Used an influxdb container for tests
+
+## [1.0.0] - 2024-01-21
+### Added
 - [#73](https://github.com/devatherock/kafka-lag-monitor/issues/73): Documented configurable properties and environment variables
 - Used `circleci-templates` orb to simplify CI pipeline
 - [#172](https://github.com/devatherock/kafka-lag-monitor/issues/172): Added integration tests
