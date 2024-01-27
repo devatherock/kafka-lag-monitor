@@ -41,7 +41,7 @@ parameters:
 executors:
   jdk-executor:
     docker:
-      - image: devatherock/graalvm:17-ol8
+      - image: devatherock/graalvm:21-ol8
         <<: *docker_auth
     <<: *resource_class
     <<: *work_directory
