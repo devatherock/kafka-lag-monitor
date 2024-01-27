@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Changed
 - chore(deps): update plugin com.diffplug.spotless to v6.25.0
+- chore(deps): update devatherock/graalvm docker tag to v21
 
 ## [1.0.0] - 2024-01-22
 ### Added
