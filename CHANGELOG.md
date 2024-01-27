@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- chore(deps): update plugin com.diffplug.spotless to v6.25.0
+
+## [1.0.0] - 2024-01-22
 ### Added
 - [#73](https://github.com/devatherock/kafka-lag-monitor/issues/73): Documented configurable properties and environment variables
 - Used `circleci-templates` orb to simplify CI pipeline
