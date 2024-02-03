@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Changed
 - chore(deps): update plugin com.diffplug.spotless to v6.25.0
+- chore(deps): update dependency gradle to v8.6
 
 ## [1.0.0] - 2024-01-22
 ### Added
