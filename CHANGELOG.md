@@ -5,6 +5,7 @@
 - chore(deps): update plugin com.diffplug.spotless to v6.25.0
 - chore(deps): update dependency gradle to v8.6
 - chore(deps): update cimg/openjdk docker tag to v17.0.10
+- chore(deps): update templates orb to v0.5.0
 
 ## [1.0.0] - 2024-01-22
 ### Added
