@@ -7,6 +7,7 @@
 - chore(deps): update cimg/openjdk docker tag to v17.0.10
 - chore(deps): update templates orb to v0.5.0
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.12
+- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.0
 
 ## [1.0.0] - 2024-01-22
 ### Added
