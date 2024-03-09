@@ -11,6 +11,7 @@
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.1
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.7.0
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.2
+- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.3
 
 ## [1.0.0] - 2024-01-22
 ### Added
