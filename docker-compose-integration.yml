@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   kafka:
-    image: bitnami/kafka:3.6.1
+    image: bitnami/kafka:3.7.0
     ports:
       - "9092:9092"
     environment:
@@ -17,7 +17,7 @@ services:
       KAFKA_CFG_INTER_BROKER_LISTENER_NAME: INTERNAL
 
   kafka-create-topics:
-    image: bitnami/kafka:3.6.1
+    image: bitnami/kafka:3.7.0
     depends_on:
       - kafka
     command: >
