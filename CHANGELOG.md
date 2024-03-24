@@ -17,6 +17,7 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.0
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.32
 - chore(deps): update dependency gradle to v8.7
+- chore(deps): update ghcr.io/graalvm/native-image-community docker tag to v22
 
 ## [1.0.0] - 2024-01-22
 ### Added
