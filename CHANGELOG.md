@@ -19,6 +19,7 @@
 - chore(deps): update dependency gradle to v8.7
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.13
 - chore(deps): update plugin org.sonarqube to v5
+- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.5
 
 ## [1.0.0] - 2024-01-22
 ### Added
