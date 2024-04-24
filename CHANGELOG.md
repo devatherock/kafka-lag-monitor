@@ -1,29 +1,24 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Used an influxdb container for tests
+
 ### Changed
 - chore(deps): update plugin com.diffplug.spotless to v6.25.0
-- chore(deps): update dependency gradle to v8.6
-- chore(deps): update cimg/openjdk docker tag to v17.0.10
-- chore(deps): update templates orb to v0.5.0
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.12
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.0
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.1
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.7.0
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.2
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.3
 - chore(deps): update bitnami/kafka docker tag to v3.7.0
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.16.2
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.0
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.32
 - chore(deps): update dependency gradle to v8.7
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.13
 - chore(deps): update plugin org.sonarqube to v5
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.5
 - chore(deps): update cimg/openjdk docker tag to v17.0.11
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.6
+- chore(deps): update templates orb to v0.6.0
+- Triggered slack notification on pipeline failure as well
 
-## [1.0.0] - 2024-01-22
+## [1.0.0] - 2024-01-21
 ### Added
 - [#73](https://github.com/devatherock/kafka-lag-monitor/issues/73): Documented configurable properties and environment variables
 - Used `circleci-templates` orb to simplify CI pipeline

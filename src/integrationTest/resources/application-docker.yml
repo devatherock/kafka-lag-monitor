@@ -2,7 +2,8 @@ micronaut:
   metrics:
     export:
       influx:
-        uri: 'http://localhost:8080/influx'
+        step: 5s
+        uri: http://influxdb:8086
 kafka:
   clusters:
     - name: test-cluster

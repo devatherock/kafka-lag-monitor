@@ -29,6 +29,13 @@ services:
         /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server kafka:9093 --replication-factor 1 --partitions 1 --topic test-topic
       "
 
+  influxdb:
+    image: influxdb:1.8.10-alpine
+    ports:
+      - "8086:8086"
+    networks:
+      - ci-network
+
 networks:
   ci-network:
     external: true

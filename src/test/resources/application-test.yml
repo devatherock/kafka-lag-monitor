@@ -4,7 +4,8 @@ micronaut:
   metrics:
     export:
       influx:
-        uri: 'http://localhost:8091/influx'
+        step: 5s
+        uri: http://${DOCKER_NETWORK_IP:localhost}:8086
 test:
   server:
     url: http://localhost:8091
