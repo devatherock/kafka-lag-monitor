@@ -17,6 +17,7 @@
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.6
 - chore(deps): update templates orb to v0.6.0
 - Triggered slack notification on pipeline failure as well
+- Used multi-arch `influxdb` docker image
 
 ## [1.0.0] - 2024-01-21
 ### Added
