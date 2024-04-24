@@ -65,7 +65,7 @@ class InfluxdbControllerSpec extends Specification {
                         .queryParam('precision', 'ms')
                         .queryParam('db', 'mydb').build(), 'test line protocol1\n')
                 .contentType('text/plain'))
-        Thread.sleep(2500)
+        Thread.sleep(3000)
         httpClient.toBlocking().exchange(HttpRequest.POST(UriBuilder.of('/influx/write')
                 .queryParam('consistency', 'one')
                 .queryParam('precision', 'ms')
