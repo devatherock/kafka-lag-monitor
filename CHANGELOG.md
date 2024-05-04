@@ -11,14 +11,14 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.0
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.32
 - chore(deps): update dependency gradle to v8.7
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.13
 - chore(deps): update plugin org.sonarqube to v5
 - chore(deps): update cimg/openjdk docker tag to v17.0.11
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.6
-- chore(deps): update templates orb to v0.6.0
 - Triggered slack notification on pipeline failure as well
 - Used multi-arch `influxdb` docker image
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.14
+- chore(deps): update templates orb to v0.7.0
+- Combined the amd64 and arm64 images into a single multi-arch image
 
 ## [1.0.0] - 2024-01-21
 ### Added
