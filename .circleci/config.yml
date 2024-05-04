@@ -31,7 +31,7 @@ pr_filter: &pr_filter
       ignore: master
 
 orbs:
-  templates: devatherock/circleci-templates@0.6.0
+  templates: devatherock/circleci-templates@0.7.0
 
 parameters:
   repo_name:
@@ -125,12 +125,11 @@ jobs:
       - attach_workspace:
           at: ~/<< pipeline.parameters.repo_name >>
       - run: |
-          TAG=${CIRCLE_SHA1:0:8}
+          TAG=${CIRCLE_SHA1:0:8}-amd64
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
           docker build \
             -t devatherock/<< pipeline.parameters.repo_name >>:$TAG \
-            -t devatherock/<< pipeline.parameters.repo_name >>:amd64 \
-            -t devatherock/<< pipeline.parameters.repo_name >>:latest .
+            -t devatherock/<< pipeline.parameters.repo_name >>:amd64 .
           docker image push --all-tags devatherock/<< pipeline.parameters.repo_name >>
 
   publish_arm:
@@ -149,8 +148,6 @@ jobs:
 
   integration_test:
     parameters:
-      command_args:
-        type: string
       runner:
         type: executor
     executor: << parameters.runner >>
@@ -163,7 +160,7 @@ jobs:
             - v1-integration-{{ checksum "build.gradle" }}
             - v1-integration
       - run: |
-          make integration-test << parameters.command_args >>
+          make integration-test
       - save_cache:
           paths:
             - ~/.gradle
@@ -182,14 +179,11 @@ jobs:
           TAG=${CIRCLE_TAG#v}
           DEV_TAG=${CIRCLE_SHA1:0:8}
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          docker pull devatherock/<< pipeline.parameters.repo_name >>:$DEV_TAG
-          docker tag devatherock/<< pipeline.parameters.repo_name >>:$DEV_TAG devatherock/<< pipeline.parameters.repo_name >>:$TAG
-          docker tag devatherock/<< pipeline.parameters.repo_name >>:$DEV_TAG devatherock/<< pipeline.parameters.repo_name >>:${TAG}-amd64
-          docker pull devatherock/<< pipeline.parameters.repo_name >>:${DEV_TAG}-arm64
-          docker tag devatherock/<< pipeline.parameters.repo_name >>:${DEV_TAG}-arm64 devatherock/<< pipeline.parameters.repo_name >>:${TAG}-arm64
-          docker push devatherock/<< pipeline.parameters.repo_name >>:$TAG
-          docker push devatherock/<< pipeline.parameters.repo_name >>:${TAG}-amd64
-          docker push devatherock/<< pipeline.parameters.repo_name >>:${TAG}-arm64
+          docker buildx create --name rockbuilder \
+            --driver docker-container --use --bootstrap
+          docker buildx imagetools create \
+            -t devatherock/<< pipeline.parameters.repo_name >>:$TAG \
+            devatherock/<< pipeline.parameters.repo_name >>:$DEV_TAG
 
 workflows:
   version: 2.1
@@ -226,6 +220,14 @@ workflows:
             - docker-credentials
           requires:
             - build
+      - templates/image_merge:
+          name: publish_multi_arch
+          context:
+            - docker-credentials
+          docker_image: '<< pipeline.parameters.repo_name >>'
+          requires:
+            - publish
+            - publish_arm
       - templates/dockerhub_readme_update:
           name: dockerhub_readme
           context:
@@ -235,21 +237,19 @@ workflows:
           image_description: 'Monitors kafka lag and publishes the metrics to different metrics backends'
           work_dir: '~/<< pipeline.parameters.repo_name >>'
           requires:
-            - publish_arm
+            - publish_multi_arch
       - integration_test:
           name: integration_test_amd
           context:
             - docker-credentials
           runner: machine-executor
-          command_args: ''
           requires:
-            - publish
+            - publish_multi_arch
       - integration_test:
           name: integration_test_arm
           context:
             - docker-credentials
           runner: arm-executor
-          command_args: 'docker_tag=arm64'
           requires:
             - dockerhub_readme
 
