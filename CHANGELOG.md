@@ -1,6 +1,10 @@
 # Changelog
 
 ## [Unreleased]
+### Changed
+- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.1
+
+## [1.1.0] - 2024-05-04
 ### Added
 - Used an influxdb container for tests
 
