@@ -5,6 +5,7 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.1
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.15
 - fix(deps): update dependency org.objenesis:objenesis to v3.4
+- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.16
 
 ## [1.1.0] - 2024-05-04
 ### Added
