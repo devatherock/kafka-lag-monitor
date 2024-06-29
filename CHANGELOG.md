@@ -8,6 +8,7 @@
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.16
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.17
 - chore(deps): update dependency gradle to v8.8
+- fix(deps): update dependency org.projectlombok:lombok to v1.18.34
 
 ## [1.1.0] - 2024-05-04
 ### Added
