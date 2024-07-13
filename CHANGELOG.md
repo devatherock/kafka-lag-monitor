@@ -11,6 +11,7 @@
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.34
 - chore(deps): update bitnami/kafka docker tag to v3.7.1
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.2
+- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.18
 
 ## [1.1.0] - 2024-05-04
 ### Added
