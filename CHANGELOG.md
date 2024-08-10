@@ -18,6 +18,7 @@
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.1
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.8.0
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v8
+- fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.6
 
 ## [1.1.0] - 2024-05-04
 ### Added
