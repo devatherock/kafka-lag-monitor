@@ -22,6 +22,7 @@
 - chore(deps): update bitnami/kafka docker tag to v3.8.0
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.7
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.19
+- chore(deps): update dependency gradle to v8.10
 
 ## [1.1.0] - 2024-05-04
 ### Added
