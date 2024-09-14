@@ -26,6 +26,7 @@
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.0
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.1
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.8
+- chore(deps): update dependency gradle to v8.10.1
 
 ## [1.1.0] - 2024-05-04
 ### Added
