@@ -28,6 +28,7 @@
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.8
 - chore(deps): update dependency gradle to v8.10.1
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.7
+- chore(deps): update ghcr.io/graalvm/native-image-community docker tag to v23
 
 ## [1.1.0] - 2024-05-04
 ### Added
