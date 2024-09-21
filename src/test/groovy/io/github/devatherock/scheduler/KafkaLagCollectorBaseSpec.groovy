@@ -2,8 +2,6 @@ package io.github.devatherock.scheduler
 
 import java.time.Duration
 
-import javax.inject.Inject
-
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.clients.producer.KafkaProducer
 import org.apache.kafka.clients.producer.ProducerRecord
@@ -14,6 +12,7 @@ import org.influxdb.dto.Query
 import io.micronaut.context.env.Environment
 import io.micronaut.http.client.HttpClient
 import io.micronaut.http.client.annotation.Client
+import jakarta.inject.Inject
 import spock.lang.Specification
 import spock.util.concurrent.PollingConditions
 
@@ -75,7 +74,7 @@ abstract class KafkaLagCollectorBaseSpec extends Specification {
         then:
         conditions.eventually {
             httpClient.toBlocking().retrieve('/prometheus').contains('''
-            kafka_consumer_lag_max{cluster_name="test-cluster",group="test-consumer",partition="0",topic="test-topic",} 2.0
+            kafka_consumer_lag_max{cluster_name="test-cluster",group="test-consumer",partition="0",topic="test-topic"} 2.0
         '''.trim()
             )
         }

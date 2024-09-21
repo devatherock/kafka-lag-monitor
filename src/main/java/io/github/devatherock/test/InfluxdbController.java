@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class InfluxdbController {
     private StringBuilder metrics = new StringBuilder();
-    private long lastRequestTime = System.currentTimeMillis();
+    private long lastRefreshTime = System.currentTimeMillis();
 
     /**
      * Captures metrics published by {@link InfluxMeterRegistry}
@@ -36,14 +36,14 @@ public class InfluxdbController {
     public void influxMetrics(@Body String payload) {
         long currentTime = System.currentTimeMillis();
 
-        // If last request was within 2 seconds, assume this request is part of the same
-        // batch
-        if (currentTime - lastRequestTime < 2000) {
+        // Refresh if last refresh was more than 2 seconds ago
+        if (currentTime - lastRefreshTime < 2000) {
             metrics.append(payload);
         } else {
             metrics = new StringBuilder(payload);
+            lastRefreshTime = currentTime;
         }
-        lastRequestTime = currentTime;
+
         LOGGER.debug("Metrics written to influx");
     }
 

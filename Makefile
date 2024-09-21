@@ -12,4 +12,5 @@ build-all:
 	./unit-tests.sh
 	./gradlew build -x test
 docker-build:
-	docker build -t devatherock/kafka-lag-monitor:$(docker_tag) .
+	./gradlew dockerBuildNative -Dnative.threads=2 -Dnative.xmx=4096m \
+	    -Dnative.tag=$(docker_tag) -Dnative.arch=native -Dnative.mode=dev
