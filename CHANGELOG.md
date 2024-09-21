@@ -2,28 +2,14 @@
 
 ## [Unreleased]
 ### Changed
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.1
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.15
 - fix(deps): update dependency org.objenesis:objenesis to v3.4
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.16
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.17
-- chore(deps): update dependency gradle to v8.8
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.34
-- chore(deps): update bitnami/kafka docker tag to v3.7.1
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.2
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.18
-- fix(deps): update dependency org.apache.kafka:kafka-clients to v3.7.1
-- chore(deps): update dependency gradle to v8.9
 - chore(deps): update plugin org.sonarqube to v5.1.0.4882
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.1
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.8.0
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v8
-- fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.6
 - chore(deps): update bitnami/kafka docker tag to v3.8.0
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.7
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.14.19
-- chore(deps): update dependency gradle to v8.10
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.0
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.1
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.8
 - chore(deps): update dependency gradle to v8.10.1
