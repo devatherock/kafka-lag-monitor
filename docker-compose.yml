@@ -26,7 +26,7 @@ services:
       - ci-network
     command: >
       bash -c "
-        /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server kafka:9093 --replication-factor 1 --partitions 1 --topic test-topic
+        /opt/bitnami/kafka/bin/kafka-topics.sh --create --if-not-exists --bootstrap-server kafka:9093 --replication-factor 1 --partitions 1 --topic test-topic
       "
 
   influxdb:
@@ -35,6 +35,26 @@ services:
       - "8086:8086"
     networks:
       - ci-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8086/metrics" ]
+      interval: 2s
+      timeout: 60s
+      retries: 30
+
+  health:
+    image: alpine:3.20.3
+    depends_on:
+      kafka-create-topics:
+        condition: service_completed_successfully
+      influxdb:
+        condition: service_healthy
+    networks:
+      - ci-network
+    command: |
+      sh -c '
+        wget -q -O - http://influxdb:8086/metrics
+        sleep 600
+      '
 
 networks:
   ci-network:

@@ -3,7 +3,7 @@ docker_tag=latest
 clean:
 	rm -rf build
 integration-test:
-	DOCKER_TAG=$(docker_tag) docker-compose -f docker-compose-integration.yml up &
+	DOCKER_TAG=$(docker_tag) docker compose -f docker-compose-integration.yml up --wait
 	./gradlew integrationTest
 	docker-compose -f docker-compose-integration.yml down
 test:

@@ -22,7 +22,7 @@ services:
       - kafka
     command: >
       bash -c "
-        /opt/bitnami/kafka/bin/kafka-topics.sh --create --bootstrap-server kafka:9093 --replication-factor 1 --partitions 1 --topic test-topic
+        /opt/bitnami/kafka/bin/kafka-topics.sh --create --if-not-exists --bootstrap-server kafka:9093 --replication-factor 1 --partitions 1 --topic test-topic
       "
 
   influxdb:
@@ -42,3 +42,18 @@ services:
     environment:
       JAVA_OPTS: '-Xmx640m'
       MICRONAUT_CONFIG_FILES: '/config/application.yml'
+
+  health:
+    image: alpine:3.20.3
+    depends_on:
+      - kafka-lag-monitor
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://kafka-lag-monitor:8080/health"]
+      interval: 2s
+      timeout: 60s
+      retries: 30
+    command: |
+      sh -c '
+        wget -q -O - http://kafka-lag-monitor:8080/health
+        sleep 120
+      '
