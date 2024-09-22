@@ -15,6 +15,7 @@
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.7
 - [#291](https://github.com/devatherock/kafka-lag-monitor/issues/291): Upgraded `micronaut` to `4.6.2`
 - [#292](https://github.com/devatherock/kafka-lag-monitor/issues/292): Upgraded to Java 21
+- Built native image using micronaut gradle plugin
 
 ## [1.1.0] - 2024-05-04
 ### Added
