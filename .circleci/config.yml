@@ -5,7 +5,7 @@ docker_auth: &docker_auth
 
 docker_executor_image: &docker_executor_image
   docker:
-    - image: cimg/openjdk:17.0.11
+    - image: cimg/openjdk:21.0.2
       <<: *docker_auth
 
 vm_executor_image: &vm_executor_image
@@ -40,9 +40,7 @@ parameters:
   
 executors:
   jdk-executor:
-    docker:
-      - image: devatherock/graalvm:17-ol8
-        <<: *docker_auth
+    <<: *docker_executor_image
     <<: *resource_class
     <<: *work_directory
     environment:
@@ -84,7 +82,7 @@ jobs:
             - v1-dependencies
       - run: |
           make test
-          ./gradlew check sonar -x test -Dsonar.token=$SONAR_TOKEN -Dgraalvm=true
+          ./gradlew check sonar -x test -Dsonar.token=$SONAR_TOKEN
       - store_artifacts:
           path: build/reports
       - store_test_results:
@@ -103,7 +101,7 @@ jobs:
             - v1-dependencies
       - run: |
           make test
-          ./gradlew build coveralls sonar -x test -Dsonar.token=$SONAR_TOKEN -Dgraalvm=true
+          ./gradlew build coveralls sonar -x test -Dsonar.token=$SONAR_TOKEN
       - persist_to_workspace:
           root: ~/kafka-lag-monitor
           paths:
@@ -127,9 +125,10 @@ jobs:
       - run: |
           TAG=${CIRCLE_SHA1:0:8}-amd64
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          docker build \
-            -t devatherock/<< pipeline.parameters.repo_name >>:$TAG \
-            -t devatherock/<< pipeline.parameters.repo_name >>:amd64 .
+          ./gradlew dockerBuildNative -Dnative.tag=$TAG
+          docker tag \
+            devatherock/<< pipeline.parameters.repo_name >>:$TAG \
+            devatherock/<< pipeline.parameters.repo_name >>:amd64 .
           docker image push --all-tags devatherock/<< pipeline.parameters.repo_name >>
 
   publish_arm:
@@ -141,9 +140,10 @@ jobs:
       - run: |
           TAG=${CIRCLE_SHA1:0:8}-arm64
           echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          docker build \
-            -t devatherock/<< pipeline.parameters.repo_name >>:$TAG \
-            -t devatherock/<< pipeline.parameters.repo_name >>:arm64 .
+          ./gradlew dockerBuildNative -Dnative.tag=$TAG
+          docker tag \
+            devatherock/<< pipeline.parameters.repo_name >>:$TAG \
+            devatherock/<< pipeline.parameters.repo_name >>:arm64 .
           docker image push --all-tags devatherock/<< pipeline.parameters.repo_name >>
 
   integration_test:

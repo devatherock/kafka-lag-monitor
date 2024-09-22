@@ -42,6 +42,7 @@ services:
     environment:
       JAVA_OPTS: '-Xmx640m'
       MICRONAUT_CONFIG_FILES: '/config/application.yml'
+      LOGBACK_CONFIGURATION_FILE: 'logback-json.xml'
 
   health:
     image: alpine:3.20.3

@@ -1,6 +1,6 @@
 plugins {
     id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id 'io.micronaut.application' version '3.7.10'
+    id 'io.micronaut.application' version '4.4.2'
     id 'java'
     id 'groovy'
     id 'jacoco'
@@ -9,10 +9,10 @@ plugins {
     id 'com.diffplug.spotless' version '6.25.0'
 }
 
-version = "0.3.0"
+version = "2.0.0"
 group = "io.github.devatherock"
-sourceCompatibility = '11'
-targetCompatibility = '11'
+sourceCompatibility = '17'
+targetCompatibility = '17'
 
 repositories {
     mavenCentral()
@@ -41,13 +41,14 @@ dependencies {
 
     annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     annotationProcessor("io.micronaut.openapi:micronaut-openapi")
+    annotationProcessor("io.micronaut.validation:micronaut-validation-processor")
 
     compileOnly group: 'org.projectlombok', name: 'lombok', version: lombokVersion
     compileOnly group: 'com.google.code.findbugs', name: 'annotations', version: '3.0.1'
     compileOnly("org.graalvm.nativeimage:svm")
 
     implementation("io.micronaut:micronaut-inject")
-    implementation("io.micronaut:micronaut-validation")
+    implementation("io.micronaut.validation:micronaut-validation")
     implementation("io.micronaut:micronaut-runtime")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.swagger.core.v3:swagger-annotations")
@@ -56,13 +57,18 @@ dependencies {
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-influx")
     implementation("io.micronaut.micrometer:micronaut-micrometer-registry-prometheus")
 
+    // Micronaut 4.x: To fix 'No bean of type [io.micronaut.json.JsonMapper] exists'
+    implementation("io.micronaut:micronaut-jackson-databind")
+
     implementation group: 'net.logstash.logback', name: 'logstash-logback-encoder', version: '8.0'
     implementation group: 'org.apache.kafka', name: 'kafka-clients', version: '3.8.0'
     implementation group: 'org.xerial.snappy', name: 'snappy-java', version: '1.1.10.7'
-    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
     implementation("ch.qos.logback:logback-classic:1.5.8")
 
-    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.3-groovy-3.0'
+    // Micronaut 4.x: To fix 'YAML configuration file detected but snakeyaml is not on classpath'
+    runtimeOnly("org.yaml:snakeyaml")
+
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '2.3-groovy-4.0'
     testImplementation group: 'net.bytebuddy', name: 'byte-buddy', version: '1.15.1'
     testImplementation group: 'org.objenesis', name: 'objenesis', version: '3.4'
     testImplementation group: 'io.micronaut', name: 'micronaut-inject-groovy'
@@ -74,25 +80,53 @@ application {
     mainClass.set("io.github.devatherock.Application")
 }
 
-test {
-    doFirst {
-        if (Boolean.getBoolean('graalvm')) {
-            jvmArgs("-agentlib:native-image-agent=access-filter-file=$projectDir/src/main/resources/graal/access-filter.json,config-output-dir=$projectDir/build/graal")
-        }
-    }
-}
-
-// Generates resource-config.json file for graalvm
-build.dependsOn(generateResourcesConfigFile)
-
 tasks.withType(Test) {
     useJUnitPlatform()
     environment('DOCKER_NETWORK_IP', System.getenv('DOCKER_NETWORK_IP') ?: 'localhost')
 }
 
+graalvmNative {
+    binaries {
+        main {
+            buildArgs.add('--verbose')
+            buildArgs.add("-J-Xmx${System.getProperty('native.xmx', '6144m')}")
+            buildArgs.add('-H:InitialCollectionPolicy=BySpaceAndTime')
+
+            if (System.properties['native.threads']) {
+                buildArgs.add("-H:NumberOfThreads=${System.properties['native.threads']}")
+            }
+
+            if (System.properties['native.arch']) {
+                buildArgs.add("-march=${System.properties['native.arch']}")
+            }
+
+            // Quick build mode
+            if (System.properties['native.mode'] == 'dev') {
+                buildArgs.add('-Ob')
+            }
+        }
+    }
+}
+
+tasks.named('dockerfileNative') {
+    jdkVersion = System.getProperty('native.jdk', '21')
+
+    baseImage('gcr.io/distroless/cc-debian12:latest')
+    instruction('LABEL maintainer="devatherock@gmail.com"')
+    instruction("""
+        LABEL io.github.devatherock.version="${project.version}"
+    """.trim())
+}
+
+tasks.named('dockerBuildNative') {
+    images = [
+        "devatherock/${project.name}:${System.getProperty('native.tag', 'latest')}"
+    ]
+}
+
 run {
     classpath += configurations.developmentOnly
-    jvmArgs('-noverify', '-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
+    jvmArgs('-XX:TieredStopAtLevel=1', '-Dcom.sun.management.jmxremote')
     systemProperties(System.properties)
 }
 

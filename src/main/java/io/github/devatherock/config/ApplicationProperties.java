@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.annotation.PostConstruct;
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-
 import io.micronaut.context.annotation.ConfigurationProperties;
 import io.micronaut.context.annotation.Context;
+import io.micronaut.core.annotation.Introspected;
+import jakarta.annotation.PostConstruct;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +42,7 @@ public class ApplicationProperties {
      */
     @Getter
     @Setter
+    @Introspected
     @ConfigurationProperties("lag-monitor")
     public static class LagMonitorProperties {
         /**
@@ -73,6 +74,7 @@ public class ApplicationProperties {
 
     @Getter
     @Setter
+    @Introspected
     public static class ClusterConfig {
         /**
          * Name of the cluster. The same name will be needed in
@@ -96,6 +98,7 @@ public class ApplicationProperties {
      */
     @Getter
     @Setter
+    @Introspected
     public static class LagMonitorConfig {
         /**
          * Name of the cluster to monitor. Should be one of the defined
