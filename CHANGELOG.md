@@ -7,9 +7,8 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.17.2
 - chore(deps): update plugin org.sonarqube to v5.1.0.4882
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.1
-- fix(deps): update dependency org.apache.kafka:kafka-clients to v3.8.0
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v8
-- chore(deps): update bitnami/kafka docker tag to v3.8.0
+- chore(deps): Upgraded kafka to `3.8.0`
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.1
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.8
 - chore(deps): update dependency gradle to v8.10.1
