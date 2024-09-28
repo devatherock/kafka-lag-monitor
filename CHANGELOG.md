@@ -18,6 +18,7 @@
 - Built native image using micronaut gradle plugin
 - chore(deps): update dependency gradle to v8.10.2
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.3
+- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.18.0
 
 ## [1.1.0] - 2024-05-04
 ### Added
