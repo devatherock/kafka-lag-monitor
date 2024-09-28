@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+### Added
+- Test to verify log format
+
 ### Changed
 - fix(deps): update dependency org.objenesis:objenesis to v3.4
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.34
@@ -9,9 +12,7 @@
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.1
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v8
 - chore(deps): Upgraded kafka to `3.8.0`
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.1
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.8
-- chore(deps): update dependency gradle to v8.10.1
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.7
 - [#291](https://github.com/devatherock/kafka-lag-monitor/issues/291): Upgraded `micronaut` to `4.6.2`
 - [#292](https://github.com/devatherock/kafka-lag-monitor/issues/292): Upgraded to Java 21

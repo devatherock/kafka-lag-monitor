@@ -32,6 +32,7 @@ services:
 
   kafka-lag-monitor:
     image: devatherock/kafka-lag-monitor:${DOCKER_TAG:-latest}
+    container_name: kafka-lag-monitor-intg
     depends_on:
       - influxdb
       - kafka-create-topics
@@ -42,7 +43,7 @@ services:
     environment:
       JAVA_OPTS: '-Xmx640m'
       MICRONAUT_CONFIG_FILES: '/config/application.yml'
-      LOGBACK_CONFIGURATION_FILE: 'logback-json.xml'
+      LOGBACK_CONFIGURATION_FILE: ${LOGGING_CONFIG:-logback-json.xml}
 
   health:
     image: alpine:3.20.3
