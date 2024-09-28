@@ -16,6 +16,7 @@
 - [#291](https://github.com/devatherock/kafka-lag-monitor/issues/291): Upgraded `micronaut` to `4.6.2`
 - [#292](https://github.com/devatherock/kafka-lag-monitor/issues/292): Upgraded to Java 21
 - Built native image using micronaut gradle plugin
+- chore(deps): update dependency gradle to v8.10.2
 
 ## [1.1.0] - 2024-05-04
 ### Added
