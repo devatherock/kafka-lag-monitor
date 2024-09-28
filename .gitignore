@@ -17,3 +17,4 @@ bin/
 code-formatter.xml
 checkstyle.xml
 codenarc.xml
+logs-intg.txt

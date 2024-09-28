@@ -83,6 +83,7 @@ application {
 tasks.withType(Test) {
     useJUnitPlatform()
     environment('DOCKER_NETWORK_IP', System.getenv('DOCKER_NETWORK_IP') ?: 'localhost')
+    environment('LOGGING_CONFIG', System.getenv('LOGGING_CONFIG') ?: '')
 }
 
 run {
