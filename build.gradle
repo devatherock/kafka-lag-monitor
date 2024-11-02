@@ -31,7 +31,7 @@ configurations {
     all {
         resolutionStrategy {
             force 'org.jsoup:jsoup:1.18.1'
-            force 'com.fasterxml.jackson.core:jackson-databind:2.18.0'
+            force 'com.fasterxml.jackson.core:jackson-databind:2.18.1'
         }
     }
 }
