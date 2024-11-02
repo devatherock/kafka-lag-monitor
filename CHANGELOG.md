@@ -11,6 +11,7 @@
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.12
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.7
 - chore(deps): update bitnami/kafka docker tag to v3.8.1
+- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.18.1
 
 ## [2.0.0] - 2024-09-28
 ### Added
