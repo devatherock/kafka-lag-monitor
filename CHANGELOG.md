@@ -16,6 +16,7 @@
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.8.1
 - chore(deps): update influxdb docker tag to v1.11.7
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.9
+- chore(deps): update plugin io.micronaut.application to v4.4.4
 
 ## [2.0.0] - 2024-09-28
 ### Added
