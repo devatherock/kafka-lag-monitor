@@ -21,6 +21,7 @@
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v3.9.0
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.36
 - chore(deps): update bitnami/kafka docker tag to v3.9.0
+- chore(deps): update dependency gradle to v8.11
 
 ## [2.0.0] - 2024-09-28
 ### Added
