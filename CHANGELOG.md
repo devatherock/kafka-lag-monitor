@@ -23,6 +23,7 @@
 - chore(deps): update bitnami/kafka docker tag to v3.9.0
 - chore(deps): update dependency gradle to v8.11
 - chore(deps): update dependency gradle to v8.11.1
+- chore(deps): update influxdb docker tag to v1.11.8
 
 ## [2.0.0] - 2024-09-28
 ### Added
