@@ -22,6 +22,7 @@
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.36
 - chore(deps): update bitnami/kafka docker tag to v3.9.0
 - chore(deps): update dependency gradle to v8.11
+- chore(deps): update dependency gradle to v8.11.1
 
 ## [2.0.0] - 2024-09-28
 ### Added
