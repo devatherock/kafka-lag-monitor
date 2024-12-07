@@ -29,6 +29,7 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.18.2
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.2
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.3
+- chore(deps): update alpine docker tag to v3.21.0
 
 ## [2.0.0] - 2024-09-28
 ### Added
