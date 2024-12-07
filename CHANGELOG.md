@@ -28,6 +28,7 @@
 - chore(deps): update plugin org.sonarqube to v6.0.1.5171
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.18.2
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.2
+- fix(deps): update dependency org.jsoup:jsoup to v1.18.3
 
 ## [2.0.0] - 2024-09-28
 ### Added
