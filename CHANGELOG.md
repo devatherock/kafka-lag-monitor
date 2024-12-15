@@ -30,6 +30,7 @@
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.2
 - fix(deps): update dependency org.jsoup:jsoup to v1.18.3
 - chore(deps): update alpine docker tag to v3.21.0
+- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.11
 
 ## [2.0.0] - 2024-09-28
 ### Added
