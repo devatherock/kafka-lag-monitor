@@ -46,7 +46,7 @@ services:
       LOGBACK_CONFIGURATION_FILE: ${LOGGING_CONFIG:-logback-json.xml}
 
   health:
-    image: alpine:3.21.0
+    image: alpine:3.21.2
     depends_on:
       - kafka-lag-monitor
     healthcheck:
