@@ -39,6 +39,7 @@
 - chore(deps): update plugin com.diffplug.spotless to v7
 - chore(deps): update plugin com.diffplug.spotless to v7.0.2
 - chore(deps): update dependency gradle to v8.12.1
+- chore(deps): update plugin io.micronaut.application to v4.4.5
 
 ## [2.0.0] - 2024-09-28
 ### Added
