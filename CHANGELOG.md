@@ -43,6 +43,7 @@
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.16.1
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.0
 - chore(deps): update alpine docker tag to v3.21.3
+- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.1
 
 ## [2.0.0] - 2024-09-28
 ### Added
