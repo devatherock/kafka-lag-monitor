@@ -48,6 +48,7 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.18.3
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.2
 - chore(deps): update dependency gradle to v8.13
+- chore(deps): update plugin io.micronaut.application to v4.5.0
 
 ## [2.0.0] - 2024-09-28
 ### Added
