@@ -51,6 +51,7 @@
 - chore(deps): update plugin io.micronaut.application to v4.5.0
 - fix(deps): update dependency org.jsoup:jsoup to v1.19.1
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.18
+- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.3
 
 ## [2.0.0] - 2024-09-28
 ### Added
