@@ -53,6 +53,7 @@
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.18
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.3
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v4
+- chore(deps): update plugin io.micronaut.application to v4.5.1
 
 ## [2.0.0] - 2024-09-28
 ### Added
