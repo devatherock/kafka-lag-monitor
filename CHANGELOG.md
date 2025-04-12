@@ -56,6 +56,7 @@
 - chore(deps): update plugin io.micronaut.application to v4.5.1
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.5
 - chore(deps): update plugin com.diffplug.spotless to v7.0.3
+- chore(deps): update plugin io.micronaut.application to v4.5.2
 
 ## [2.0.0] - 2024-09-28
 ### Added
