@@ -58,6 +58,7 @@
 - chore(deps): update plugin com.diffplug.spotless to v7.0.3
 - chore(deps): update plugin io.micronaut.application to v4.5.2
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.38
+- chore(deps): update plugin org.sonarqube to v6.1.0.5360
 
 ## [2.0.0] - 2024-09-28
 ### Added
