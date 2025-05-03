@@ -65,6 +65,7 @@
 - chore(deps): update plugin io.micronaut.application to v4.5.3
 - chore(deps): update dependency gradle to v8.14
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.19.0
+- fix(deps): update dependency org.jsoup:jsoup to v1.20.1
 
 ## [2.0.0] - 2024-09-28
 ### Added
