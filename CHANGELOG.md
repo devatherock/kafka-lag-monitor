@@ -69,6 +69,7 @@
 - chore(deps): update plugin org.sonarqube to v6.2.0.5505
 - chore(deps): update dependency gradle to v8.14.1
 - chore(deps): update plugin com.diffplug.spotless to v7.0.4
+- chore(deps): update alpine docker tag to v3.22.0
 
 ## [2.0.0] - 2024-09-28
 ### Added

@@ -42,7 +42,7 @@ services:
       retries: 30
 
   health:
-    image: alpine:3.21.3
+    image: alpine:3.22.0
     depends_on:
       kafka-create-topics:
         condition: service_completed_successfully
