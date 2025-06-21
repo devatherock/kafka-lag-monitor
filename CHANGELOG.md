@@ -72,6 +72,7 @@
 - chore(deps): update alpine docker tag to v3.22.0
 - chore(deps): update dependency gradle to v8.14.2
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.19.1
+- chore(deps): update plugin io.micronaut.application to v4.5.4
 
 ## [2.0.0] - 2024-09-28
 ### Added
