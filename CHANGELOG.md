@@ -74,6 +74,7 @@
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.19.1
 - chore(deps): update plugin io.micronaut.application to v4.5.4
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.6
+- fix(deps): update dependency org.jsoup:jsoup to v1.21.1
 
 ## [2.0.0] - 2024-09-28
 ### Added
