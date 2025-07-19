@@ -77,6 +77,7 @@
 - fix(deps): update dependency org.jsoup:jsoup to v1.21.1
 - chore(deps): update dependency gradle to v8.14.3
 - chore(deps): update plugin com.diffplug.spotless to v7.1.0
+- chore(deps): update alpine docker tag to v3.22.1
 
 ## [2.0.0] - 2024-09-28
 ### Added
