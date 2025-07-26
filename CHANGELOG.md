@@ -80,6 +80,7 @@
 - chore(deps): update alpine docker tag to v3.22.1
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.19.2
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.8
+- chore(deps): update plugin com.diffplug.spotless to v7.2.1
 
 ## [2.0.0] - 2024-09-28
 ### Added
