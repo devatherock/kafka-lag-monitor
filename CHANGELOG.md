@@ -2,85 +2,23 @@
 
 ## [Unreleased]
 ### Changed
-- chore(deps): update plugin io.micronaut.application to v4.4.3
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.9
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.4
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.10
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.11
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.5
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.12
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.7
-- chore(deps): update bitnami/kafka docker tag to v3.8.1
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.18.1
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.8
-- fix(deps): update dependency org.apache.kafka:kafka-clients to v3.8.1
-- chore(deps): update influxdb docker tag to v1.11.7
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.9
-- chore(deps): update plugin io.micronaut.application to v4.4.4
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.10
-- fix(deps): update dependency org.apache.kafka:kafka-clients to v3.9.0
-- fix(deps): update dependency org.projectlombok:lombok to v1.18.36
-- chore(deps): update bitnami/kafka docker tag to v3.9.0
-- chore(deps): update dependency gradle to v8.11
-- chore(deps): update dependency gradle to v8.11.1
 - chore(deps): update influxdb docker tag to v1.11.8
-- chore(deps): update plugin org.sonarqube to v6
-- chore(deps): update plugin org.sonarqube to v6.0.1.5171
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.18.2
-- fix(deps): update dependency org.jsoup:jsoup to v1.18.2
-- fix(deps): update dependency org.jsoup:jsoup to v1.18.3
-- chore(deps): update alpine docker tag to v3.21.0
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.15.11
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.14
-- chore(deps): update dependency gradle to v8.12
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.15
-- chore(deps): update alpine docker tag to v3.21.2
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.16
-- chore(deps): update plugin com.diffplug.spotless to v7
-- chore(deps): update plugin com.diffplug.spotless to v7.0.2
-- chore(deps): update dependency gradle to v8.12.1
-- chore(deps): update plugin io.micronaut.application to v4.4.5
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.16.1
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.0
-- chore(deps): update alpine docker tag to v3.21.3
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.1
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.17
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.18.3
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.2
-- chore(deps): update dependency gradle to v8.13
-- chore(deps): update plugin io.micronaut.application to v4.5.0
-- fix(deps): update dependency org.jsoup:jsoup to v1.19.1
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.18
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.3
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v4
-- chore(deps): update plugin io.micronaut.application to v4.5.1
-- fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.5
-- chore(deps): update plugin com.diffplug.spotless to v7.0.3
-- chore(deps): update plugin io.micronaut.application to v4.5.2
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.38
-- chore(deps): update plugin org.sonarqube to v6.1.0.5360
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v8.1
 - fix(deps): update dependency org.influxdb:influxdb-java to v2.25
-- chore(deps): update bitnami/kafka docker tag to v4
-- chore(deps): update plugin io.micronaut.application to v4.5.3
-- chore(deps): update dependency gradle to v8.14
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.19.0
-- fix(deps): update dependency org.jsoup:jsoup to v1.20.1
 - chore(deps): update plugin org.sonarqube to v6.2.0.5505
-- chore(deps): update dependency gradle to v8.14.1
-- chore(deps): update plugin com.diffplug.spotless to v7.0.4
-- chore(deps): update alpine docker tag to v3.22.0
-- chore(deps): update dependency gradle to v8.14.2
-- fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.19.1
-- chore(deps): update plugin io.micronaut.application to v4.5.4
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.6
 - fix(deps): update dependency org.jsoup:jsoup to v1.21.1
-- chore(deps): update dependency gradle to v8.14.3
-- chore(deps): update plugin com.diffplug.spotless to v7.1.0
 - chore(deps): update alpine docker tag to v3.22.1
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.19.2
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.8
 - chore(deps): update plugin com.diffplug.spotless to v7.2.1
+- chore(deps): update gradle to v9
+- Switched to com.gradleup.shadow gradle plugin from com.github.johnrengelman.shadow
+- chore(deps): update plugin io.micronaut.application to v4.5.5
+- Switched from bitnami/kafka to bitnamilegacy/kafka docker images
 
 ## [2.0.0] - 2024-09-28
 ### Added

@@ -1,6 +1,6 @@
 plugins {
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
-    id 'io.micronaut.application' version '4.5.4'
+    id 'com.gradleup.shadow' version '9.3.1'
+    id 'io.micronaut.application' version '4.5.5'
     id 'java'
     id 'groovy'
     id 'jacoco'
@@ -11,8 +11,6 @@ plugins {
 
 version = "2.0.0"
 group = "io.github.devatherock"
-sourceCompatibility = '17'
-targetCompatibility = '17'
 
 repositories {
     mavenCentral()
@@ -74,10 +72,17 @@ dependencies {
     testImplementation group: 'io.micronaut', name: 'micronaut-inject-groovy'
     testImplementation group: 'io.micronaut.test', name: 'micronaut-test-spock'
     testImplementation group: 'org.influxdb', name: 'influxdb-java', version: '2.25'
+
+    testRuntimeOnly group: 'org.junit.platform', name: 'junit-platform-launcher'
 }
 
 application {
     mainClass.set("io.github.devatherock.Application")
+}
+
+java {
+    sourceCompatibility = JavaVersion.toVersion("17")
+    targetCompatibility = JavaVersion.toVersion("17")
 }
 
 tasks.withType(Test) {
