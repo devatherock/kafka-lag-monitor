@@ -19,6 +19,7 @@
 - Switched to com.gradleup.shadow gradle plugin from com.github.johnrengelman.shadow
 - chore(deps): update plugin io.micronaut.application to v4.5.5
 - Switched from bitnami/kafka to bitnamilegacy/kafka docker images
+- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.25
 
 ## [2.0.0] - 2024-09-28
 ### Added
