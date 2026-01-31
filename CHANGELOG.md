@@ -22,6 +22,7 @@
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.25
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.42
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.27
+- chore(deps): update alpine docker tag to v3.23.3
 
 ## [2.0.0] - 2024-09-28
 ### Added
