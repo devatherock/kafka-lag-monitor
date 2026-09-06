@@ -1,5 +1,5 @@
 [![CircleCI](https://circleci.com/gh/devatherock/kafka-lag-monitor.svg?style=svg)](https://circleci.com/gh/devatherock/kafka-lag-monitor)
-[![Coverage Status](https://coveralls.io/repos/github/devatherock/kafka-lag-monitor/badge.svg?branch=master)](https://coveralls.io/github/devatherock/kafka-lag-monitor?branch=master)
+[![Coverage Status](https://sonarcloud.io/api/project_badges/measure?project=kafka-lag-monitor&metric=coverage)](https://sonarcloud.io/component_measures?id=kafka-lag-monitor&metric=coverage)
 [![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=kafka-lag-monitor&metric=alert_status)](https://sonarcloud.io/component_measures?id=kafka-lag-monitor&metric=alert_status&view=list)
 [![Docker Pulls](https://img.shields.io/docker/pulls/devatherock/kafka-lag-monitor.svg)](https://hub.docker.com/r/devatherock/kafka-lag-monitor/)
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=kafka-lag-monitor&metric=ncloc)](https://sonarcloud.io/component_measures?id=kafka-lag-monitor&metric=ncloc)
