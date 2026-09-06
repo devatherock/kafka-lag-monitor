@@ -2,30 +2,26 @@
 
 ## [Unreleased]
 ### Changed
-- chore(deps): update influxdb docker tag to v1.11.8
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.18
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v4
-- fix(deps): update dependency org.projectlombok:lombok to v1.18.38
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v8.1
 - fix(deps): update dependency org.influxdb:influxdb-java to v2.25
 - chore(deps): update plugin org.sonarqube to v6.2.0.5505
 - fix(deps): update dependency net.bytebuddy:byte-buddy to v1.17.6
 - fix(deps): update dependency org.jsoup:jsoup to v1.21.1
-- chore(deps): update alpine docker tag to v3.22.1
 - fix(deps): update dependency com.fasterxml.jackson.core:jackson-databind to v2.19.2
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.8
 - chore(deps): update plugin com.diffplug.spotless to v7.2.1
-- chore(deps): update gradle to v9
 - Switched to com.gradleup.shadow gradle plugin from com.github.johnrengelman.shadow
 - chore(deps): update plugin io.micronaut.application to v4.5.5
 - Switched from bitnami/kafka to bitnamilegacy/kafka docker images
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.25
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.42
-- fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.27
 - chore(deps): update alpine docker tag to v3.23.3
 - chore(deps): update gradle to v9.3.1
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.32
 - chore(deps): update influxdb docker tag to v1.12.4
+
+### Removed
+- Coveralls plugin
 
 ## [2.0.0] - 2024-09-28
 ### Added

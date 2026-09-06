@@ -101,7 +101,7 @@ jobs:
             - v1-dependencies
       - run: |
           make test
-          ./gradlew build coveralls sonar -x test -Dsonar.token=$SONAR_TOKEN
+          ./gradlew build sonar -x test -Dsonar.token=$SONAR_TOKEN
       - persist_to_workspace:
           root: ~/kafka-lag-monitor
           paths:
