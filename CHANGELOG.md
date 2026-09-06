@@ -20,6 +20,7 @@
 - fix(deps): update dependency ch.qos.logback:logback-classic to v1.5.32
 - chore(deps): update influxdb docker tag to v1.12.4
 - chore(deps): update cimg/openjdk docker tag to v21.0.12
+- fix(deps): update dependency org.projectlombok:lombok to v1.18.48
 
 ### Removed
 - Coveralls plugin
