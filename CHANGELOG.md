@@ -21,6 +21,7 @@
 - chore(deps): update influxdb docker tag to v1.12.4
 - chore(deps): update cimg/openjdk docker tag to v21.0.12
 - fix(deps): update dependency org.projectlombok:lombok to v1.18.48
+- chore(deps): update alpine docker tag to v3.24.1
 
 ### Removed
 - Coveralls plugin
