@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 ### Changed
+- chore(deps): update gradle to v9.7.1
+
+## [2.1.0] - 2026-09-07
+### Changed
 - fix(deps): update dependency org.apache.kafka:kafka-clients to v4
 - fix(deps): update dependency net.logstash.logback:logstash-logback-encoder to v8.1
 - fix(deps): update dependency org.influxdb:influxdb-java to v2.25
