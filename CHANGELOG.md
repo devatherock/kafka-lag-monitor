@@ -3,6 +3,7 @@
 ## [Unreleased]
 ### Changed
 - chore(deps): update gradle to v9.7.1
+- chore(deps): update influxdb docker tag to v1.13.1
 
 ## [2.1.0] - 2026-09-07
 ### Changed
