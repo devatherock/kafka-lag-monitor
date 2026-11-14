@@ -7,6 +7,7 @@
 - chore(deps): update plugin com.gradleup.shadow to v9.6.1
 - chore(deps): update alpine docker tag to v3.24.2
 - chore(deps): update gradle to v9.9.0
+- chore(deps): update alpine docker tag to v3.24.4
 
 ## [2.1.0] - 2026-09-07
 ### Changed
