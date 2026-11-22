@@ -13,6 +13,7 @@
 - chore(deps): update influxdb docker tag to v1.13.2
 - fix(deps): update dependency org.xerial.snappy:snappy-java to v1.1.10.12
 - chore(deps): update plugin io.micronaut.application to v4.6.2
+- chore(deps): update plugin org.sonarqube to v6.3.1.5724
 
 ## [2.1.0] - 2026-09-07
 ### Changed
